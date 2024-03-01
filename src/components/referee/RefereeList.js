@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReferees } from '../../redux/actions/refereeActions';
+import "../../styles/RefereeList.css"
 
 const RefereeList = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,9 @@ const RefereeList = () => {
     : referees;
 
   return (
-    <div>
+    <div className='referee-list-container'>
       <h2>Referees</h2>
-      <input type="text" placeholder="Search referees..." value={filter} onChange={(e) => setFilter(e.target.value)} />
+      <input type="text" placeholder="Search referees" value={filter} onChange={(e) => setFilter(e.target.value)} />
       {loading ? (
         <div>Loading...</div>
       ) : error ? (

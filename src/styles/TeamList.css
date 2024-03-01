@@ -1,5 +1,8 @@
+h1 {
+    color: #fff;
+    margin-left: 10px;
+}
 .team-list-container {
-    padding: 0 0 50px 0;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -16,12 +19,14 @@
     justify-content: center;
     gap: 10px;
     margin: 10px;
-    height: 300px;
-    width: 250px;
+    height: 250px;
+    width: 200px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 5px;
+    color: #fff;
+    background-color: #fff6;
     img {
-        height: 200px;
+        height: 150px;
     }
     h3 {
         margin-top: 0;

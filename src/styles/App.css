@@ -7,9 +7,38 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background: url(https://surfacingstandards.co.uk/wp-content/uploads/2020/01/RC1_0004-scaled.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 .main-container {
     /* border: 1px solid #f00; */
     height: 99.7vh;
 }
+
+/* Stilizovanje scroll bara */
+::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Boja pozadine track-a */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888; /* Boja scroll thumb-a */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Boja scroll thumb-a pri hover-u */
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin; /* "auto" ili "thin" */
+    scrollbar-color: #888 #f1f1f1; /* boja thumb-a i track-a */
+  }
+  

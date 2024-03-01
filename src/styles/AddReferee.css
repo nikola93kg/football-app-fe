@@ -1,0 +1,12 @@
+.add-referee-container {
+    background-color: #fff9;
+    margin: 0 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 89.9vh;
+    input {
+        margin: 10px 0 10px 5px;
+    }
+}

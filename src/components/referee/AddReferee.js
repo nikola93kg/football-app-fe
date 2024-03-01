@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addReferee } from '../../redux/actions/refereeActions';
 import * as Yup from 'yup';
+import "../../styles/AddReferee.css"
 
 
 const validationSchema = Yup.object({
@@ -44,7 +45,7 @@ function AddReferee() {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} className='add-referee-container'>
 
       <div>
         <label htmlFor="name">Name</label>

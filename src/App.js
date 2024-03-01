@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/teams" element={<TeamList />} />
         <Route path="/add-team" element={<AddTeam />} />
-        <Route path='/edit-team/:id' element={<EditTeam />} />
+        <Route path='/edit-team' element={<EditTeam />} />
         <Route path='/referees' element={<RefereeList />} />
         <Route path='/add-referee' element={<AddReferee />} />
       </Routes>

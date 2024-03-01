@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addTeam } from '../../redux/actions/teamActions';
+import "../../styles/AddTeam.css"
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
@@ -38,21 +39,35 @@ function AddTeam() {
 
 
       return (
-        <form onSubmit={formik.handleSubmit}>
-          <div>
-            <label htmlFor="name">Team Name</label>
-            <input id="name" name="name" type="text" onChange={formik.handleChange} value={formik.values.name} />
-            {/* napravi custom hook za ovakve stvari */}
-            {formik.errors.name ? <div>{formik.errors.name}</div> : null}
-          </div>
-          <div>
-            <label htmlFor="logo">Team Logo URL</label>
-            <input id="logo" name="logo" type="text" onChange={formik.handleChange} value={formik.values.logo} />
-            {formik.errors.logo ? <div>{formik.errors.logo}</div> : null}
-          </div>
-          <button type="submit">Submit</button>
-        </form>
-      )
+        <div className="add-team-container">
+          <form onSubmit={formik.handleSubmit}>
+            <div>
+              <label htmlFor="name">Team Name</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.name}
+              />
+              {/* napravi custom hook za ovakve stvari */}
+              {formik.errors.name ? <div className='error'>{formik.errors.name}</div> : null}
+            </div>
+            <div>
+              <label htmlFor="logo">Team Logo URL</label>
+              <input
+                id="logo"
+                name="logo"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.logo}
+              />
+              {formik.errors.logo ? <div  className='error'>{formik.errors.logo}</div> : null}
+            </div>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
+      );
 }
 
 export default AddTeam
