@@ -2,47 +2,53 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0 100px;
-    height: 88vh;
+    margin: var(--container-margin);
+    height: var(--container-height);
     form {
-        background-color: #fff9;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        width: 450px;
-        height: 420px;
+        background-color: var(--background-color-form);
+        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.897), rgba(10, 10, 10, 0.74)), url(https://i.ebayimg.com/images/g/xnMAAOSwuNNjRHMp/s-l1600.jpg);
+        background-position: center;
+        background-size: cover;
+        box-shadow: var(--box-shadow);
+        width: var(--form-width);
+        height: var(--form-height);
         border-radius: 50%;
-        padding: 50px;
+        padding: var(--form-padding);
         margin: auto;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        text-align: center;
+        font-size: large;
+        font-weight: 500;
         input {
             width: 100%;
-            margin: 10px 0;
+            margin: var(--input-margin);
             border: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius-5);
             background-color: rgba(255, 255, 255, 0.87);
             padding: 7px;
         }
         button {
-            margin-top: 15px;
-            width: 150px;
-            padding: 10px;
+            margin-top: var(--button-margin-top);
+            width: var(--button-width);
+            padding: var(--button-padding);
             border: none;
-            border-radius: 5px;
-            background-color: rgb(56, 128, 236);
+            border-radius: var(--border-radius-5);
+            background-color: var(--button-background-color);
             color: #fff;
-            transition: 0.5s all;
+            transition: all var(--transition-duration);
             &:hover {
                 cursor: pointer;
-                background-color: rgb(10, 100, 235);
+                background-color: var(--button-hover-background-color);
             }
         }
     }
 }
 
 .error {
-    color: #f00;
+    color: var(--error-color);
     text-align: center;
 }
 

@@ -11,6 +11,9 @@
       rgba(0, 0, 0, 1)
     ), url("../assets/navbackground.jpg");
     background-size: cover;
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
   
   .navbar-logo {

@@ -10,6 +10,7 @@ import "./styles/App.css"
 import EditTeam from './components/team/EditTeam';
 import AddReferee from './components/referee/AddReferee';
 import RefereeList from './components/referee/RefereeList';
+import EditReferee from './components/referee/EditReferee';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/edit-team' element={<EditTeam />} />
         <Route path='/referees' element={<RefereeList />} />
         <Route path='/add-referee' element={<AddReferee />} />
+        <Route path='/edit-referee' element={<EditReferee />} />
       </Routes>
     </div>
   )

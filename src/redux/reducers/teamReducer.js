@@ -6,6 +6,8 @@ import {
   ADD_TEAM_FAILURE,
   EDIT_TEAM_SUCCESS,
   EDIT_TEAM_FAILURE,
+  DELETE_TEAM_SUCCESS,
+  DELETE_TEAM_FAILURE,
 } from "../types/types";
 
 const initialState = {
@@ -42,5 +44,13 @@ export const teamReducer = (state = initialState, action) => {
       return { ...state, loading: false, error: action.payload };
     default:
       return state;
+    case DELETE_TEAM_SUCCESS:
+      return {
+        ...state,
+        teams: state.teams.filter((team) => team.id !== action.payload),
+        loading: false,
+      };
+    case DELETE_TEAM_FAILURE:
+      return { ...state, loading: false, error: action.payload };
   }
 };

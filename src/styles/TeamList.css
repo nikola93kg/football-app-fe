@@ -23,8 +23,15 @@ h1 {
     width: 200px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border-radius: 5px;
-    color: #fff;
-    background-color: #fff6;
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.692);
+    transition: 0.2s ease-in-out;
+    z-index: 1;
+    &:hover {
+        scale: 1.08;
+        cursor: pointer;
+        background-color: rgba(247, 228, 120, 0.6);
+    }
     img {
         height: 150px;
     }

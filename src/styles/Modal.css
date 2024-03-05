@@ -11,13 +11,16 @@
 }
 
 .modal {
-    background-color: white;
+    background-image: linear-gradient(180deg, #ffffff, rgba(151, 147, 147, 0.836)), url(https://cdn.britannica.com/51/190751-050-147B93F7/soccer-ball-goal.jpg);
+    background-position: center;
+    background-size: cover;
     padding: 50px;
     height: 300px;
     width: 500px;
     border-radius: 5px;
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     button {
         margin: 5px 0;
@@ -59,7 +62,7 @@
             margin-top: 10px;
             border-radius: 5px;
             border: none;
-            background-color: #0001;
+            background-color: rgba(255, 255, 255, 0.836);
         }
     }
 }

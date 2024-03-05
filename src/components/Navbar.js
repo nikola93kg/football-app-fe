@@ -53,7 +53,7 @@ function Navbar() {
               </li>
               <li>
                 <Link to="/edit-team" onClick={() => {setIsActive(false); setIsTeamsDropdownActive(false); }} >
-                  Edit Team
+                  Edit / Delete Team
                 </Link>
               </li>
             </ul>
@@ -73,7 +73,7 @@ function Navbar() {
               </li>
               <li>
                 <Link to="/edit-referee" onClick={() => {setIsActive(false); setIsRefereesDropdownActive(false); }} >
-                  Edit Referee
+                  Edit / Delete Referee
                 </Link>
               </li>
             </ul>

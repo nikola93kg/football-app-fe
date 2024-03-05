@@ -6,6 +6,8 @@ import {
   ADD_REFEREE_FAILURE,
   EDIT_REFEREE_SUCCESS,
   EDIT_REFEREE_FAILURE,
+  DELETE_REFEREE_SUCCESS,
+  DELETE_REFEREE_FAILURE,
 } from "../types/types";
 
 const initialState = {
@@ -52,5 +54,19 @@ export const refereeReducer = (state = initialState, action) => {
       };
     default:
       return state;
+    case DELETE_REFEREE_SUCCESS:
+      return {
+        ...state,
+        referees: state.referees.filter(
+          (referee) => referee.id !== action.payload
+        ),
+        loading: false,
+      };
+    case DELETE_REFEREE_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
   }
 };
