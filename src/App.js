@@ -11,6 +11,9 @@ import EditTeam from './components/team/EditTeam';
 import AddReferee from './components/referee/AddReferee';
 import RefereeList from './components/referee/RefereeList';
 import EditReferee from './components/referee/EditReferee';
+import AddPlayer from './components/player/AddPlayer';
+import PlayersList from './components/player/PlayerList';
+import EditDeletePlayer from './components/player/EditDeletePlayer';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
         <Route path='/referees' element={<RefereeList />} />
         <Route path='/add-referee' element={<AddReferee />} />
         <Route path='/edit-referee' element={<EditReferee />} />
+        <Route path='/add-player' element={<AddPlayer />} />
+        <Route path='/players' element={<PlayersList />} />
+        <Route path='/edit-delete-player' element={<EditDeletePlayer />} />
       </Routes>
     </div>
   )

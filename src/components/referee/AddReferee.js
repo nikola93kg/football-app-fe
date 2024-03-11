@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addReferee } from "../../redux/actions/refereeActions";
 import * as Yup from "yup";
-import "../../styles/AddReferee.css";
+import "../../styles/referee/AddReferee.css";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Name is required"),

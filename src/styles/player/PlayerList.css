@@ -1,0 +1,47 @@
+.players-list-container {
+    background-color: #fff9;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    ul {
+        list-style-type: none;
+    }
+    li {
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        border: 1px solid #f00;
+
+    }
+}
+
+.players-list-container {
+    margin: var(--container-margin);
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  th {
+    background-color: #004085;
+    color: #ffffff;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  td {
+    border-bottom: 1px solid #ddd;
+  }
+  

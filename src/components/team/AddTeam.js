@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addTeam } from '../../redux/actions/teamActions';
-import "../../styles/AddTeam.css"
+import "../../styles/team/AddTeam.css"
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),

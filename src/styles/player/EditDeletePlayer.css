@@ -1,0 +1,5 @@
+.edit-delete-player-container {
+    margin: var(--container-margin);
+    background-color: var(--background-color-form);
+    padding: 10px 0 10px 0;
+}

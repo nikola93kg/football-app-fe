@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams } from '../../redux/actions/teamActions';
-import "../../styles/TeamList.css"
+import "../../styles/team/TeamList.css"
 
 function TeamList() {
 

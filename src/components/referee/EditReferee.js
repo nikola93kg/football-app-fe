@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { editReferee, fetchReferees, deleteReferee  } from "../../redux/actions/refereeActions";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import "../../styles/EditReferee.css";
+import "../../styles/referee/EditReferee.css";
 import Modal from "../Modal";
 
 function EditReferee() {

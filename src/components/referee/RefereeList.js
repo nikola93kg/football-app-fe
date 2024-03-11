@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReferees } from '../../redux/actions/refereeActions';
-import "../../styles/RefereeList.css"
+import "../../styles/referee/RefereeList.css"
 
 const RefereeList = () => {
   const dispatch = useDispatch();
@@ -18,25 +18,25 @@ const RefereeList = () => {
       )
     : referees;
 
-  return (
-    <div className='referee-list-container'>
-      <h2>Referees</h2>
-      <input type="text" placeholder="Search referees" value={filter} onChange={(e) => setFilter(e.target.value)} />
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>Error: {error}</div>
-      ) : (
-        <ul>
+    return (
+      <div className="referee-list-container">
+        <input type="text" placeholder="Search referees" value={filter} onChange={(e) => setFilter(e.target.value)} />
+        <div className="ag-courses_box">
           {filteredReferees.map((referee) => (
-            <li key={referee.id}>
-              {referee.name}, Age: {referee.age}, Nationality: {referee.nationality}, Yellow Cards: {referee.totalYellowCardsGiven}, Red Cards: {referee.totalRedCardsGiven}
-            </li>
+            <div className="ag-courses_item" key={referee.id}>
+              <a href="#" className="ag-courses-item_link">
+                <div className="ag-courses-item_bg"></div>
+                <div className="ag-courses-item_title">{referee.name}</div>
+                <div className="ag-courses-item_date-box">Age: {referee.age}</div>
+                <div className="ag-courses-item_date-box">Nationality: {referee.nationality}</div>
+                <div className="ag-courses-item_date">Yellow Cards: {referee.totalYellowCardsGiven}</div>
+                <div className="ag-courses-item_date">Red Cards: {referee.totalRedCardsGiven}</div>
+              </a>
+            </div>
           ))}
-        </ul>
-      )}
-    </div>
-  );
+        </div>
+      </div>
+    );
 };
 
 export default RefereeList;

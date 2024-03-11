@@ -5,6 +5,8 @@ import "../styles/Navbar.css";
 import { playMusic, pauseMusic } from "../redux/actions/musicActions";
 import { useDispatch, useSelector } from "react-redux";
 
+// TODO: razmisli o sidebar-u?
+
 function Navbar() {
   const dispatch = useDispatch();
   const playing = useSelector((state) => state.music.playing);
@@ -13,6 +15,7 @@ function Navbar() {
   const [isActive, setIsActive] = useState(false);
   const [isTeamsDropdownActive, setIsTeamsDropdownActive] = useState(false);
   const [isRefereesDropdownActive, setIsRefereesDropdownActive] = useState(false);
+  const [isPlayersDropdownActive, setIsPlayersDropdownActive] = useState(false);
 
   const toggleMusic = () => {
     if (playing) {
@@ -79,11 +82,34 @@ function Navbar() {
             </ul>
           )}
         </li>
+
+        <li className="dropdown" onMouseEnter={() => setIsPlayersDropdownActive(true)} onMouseLeave={() => setIsPlayersDropdownActive(false)} >
+          <Link to="/players" onClick={() => setIsActive(false)}>
+            Players
+          </Link>
+          {isPlayersDropdownActive && (
+            <ul className="dropdown-menu">
+              <li>
+                <Link to="/add-player" onClick={() => {setIsActive(false); setIsPlayersDropdownActive(false); }} >
+                  Add Player
+                </Link>
+              </li>
+              <li>
+                <Link to="/edit-delete-player" onClick={() => {setIsActive(false); setIsPlayersDropdownActive(false); }} >
+                  Edit / Delete Player
+                </Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
+        
         {isHomePage && (
         <button onClick={toggleMusic} className="music-toggle-btn">
           {playing ? "Pause" : "Play"}
         </button>
       )}
+
       </ul>
     </nav>
   )

@@ -4,7 +4,7 @@ import { fetchTeams, editTeam, deleteTeam  } from '../../redux/actions/teamActio
 import { toast } from 'react-toastify';
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import "../../styles/EditTeam.css"
+import "../../styles/team/EditTeam.css"
 import Modal from '../Modal';
 
 function EditTeam() {
