@@ -15,7 +15,7 @@
     background-position: center;
     background-size: cover;
     padding: 50px;
-    height: 300px;
+    height: auto;
     width: 500px;
     border-radius: 5px;
     display: flex;
@@ -64,5 +64,19 @@
             border: none;
             background-color: rgba(255, 255, 255, 0.836);
         }
+        select {
+            margin-left: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 5px;
+            border: none;
+            width: 97%;
+        }
+    }
+    .option-select {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }

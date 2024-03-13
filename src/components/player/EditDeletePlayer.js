@@ -18,6 +18,8 @@ const PlayerSchema = Yup.object().shape({
   teamName: Yup.string().required("Team Name is required"),
 });
 
+// TODO: Sortiraj klubove po abecedi kada se otvori modal za editovanje
+
 function EditDeletePlayer() {
   const dispatch = useDispatch();
   // const { players } = useSelector((state) => state.player);
@@ -67,8 +69,10 @@ function EditDeletePlayer() {
               <td>{player.jerseyNumber}</td>
               <td>{player.teamName}</td>
               <td>
-                <button onClick={() => setEditingPlayer(player)}><BiSolidEditAlt /></button>
-                <button onClick={() => handleDelete(player.id)}><MdDelete /></button>
+              <div className="buttons">
+                <button className="edit-btn" onClick={() => setEditingPlayer(player)}><BiSolidEditAlt /></button>
+                <button className="delete-btn" onClick={() => handleDelete(player.id)}><MdDelete /></button>
+              </div>
               </td>
             </tr>
           ))}
@@ -103,31 +107,33 @@ function EditDeletePlayer() {
           >
             {({ errors, touched, setFieldValue, values }) => (
               <Form>
+              <label htmlFor="name">Name</label>
                 <Field name="name" />
                 {errors.name && touched.name ? <div>{errors.name}</div> : null}
-                
+                <label htmlFor="age">Age</label>
                 <Field name="age" type="number" />
                 {errors.age && touched.age ? <div>{errors.age}</div> : null}
-                
+                <label htmlFor="nationality">Nationality</label>
                 <Field name="nationality" />
                 {errors.nationality && touched.nationality ? <div>{errors.nationality}</div> : null}
-                
+                <label htmlFor="jerseyNumber">Jersey Number</label>
                 <Field name="jerseyNumber" type="number" />
                 {errors.jerseyNumber && touched.jerseyNumber ? <div>{errors.jerseyNumber}</div> : null}
                 
-                <div>
-                <label htmlFor="teamId">Team Name</label>
-                <Field as="select" name="teamId" onChange={(e) => setFieldValue("teamId", e.target.value)}>
-                  <option value="">Select a team</option>
-                  {teams.map((team) => (
-                    <option key={team.id} value={team.id}>
-                      {team.name}
-                    </option>
-                  ))}
-                </Field>
-                {errors.teamId && touched.teamId ? (
-                  <div>{errors.teamId}</div>
-                ) : null}
+                <div className="option-select">
+                  <label htmlFor="teamId">Team</label>
+                  <Field as="select" name="teamId" onChange={(e) => setFieldValue("teamId", e.target.value)}>
+                 
+                    <option value="">{values.teamName}</option>
+                    {teams.map((team) => (
+                      <option key={team.id} value={team.id}>
+                        {team.name}
+                      </option>
+                    ))}
+                  </Field>
+                  {errors.teamId && touched.teamId ? (
+                    <div>{errors.teamId}</div>
+                  ) : null}
               </div>
                 
                 <button type="submit">Save Changes</button>

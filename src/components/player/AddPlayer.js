@@ -129,7 +129,7 @@ function AddPlayer() {
         {formik.errors.positions ? <div className="error">{formik.errors.positions}</div> : null}
       </div>
 
-      <div className="form-group">
+      {/* <div className="form-group">
         <label htmlFor="transferFee">Transfer Fee (Optional)</label>
         <input id="transferFee" name="transferFee" type="number" onChange={formik.handleChange} value={formik.values.transferFee || ''} />
         {formik.errors.transferFee ? <div className="error">{formik.errors.transferFee}</div> : null}
@@ -139,7 +139,7 @@ function AddPlayer() {
         <label htmlFor="transferDate">Transfer Date (Optional)</label>
         <input id="transferDate" name="transferDate" type="date" onChange={formik.handleChange} value={formik.values.transferDate || ''} />
         {formik.errors.transferDate ? <div className="error">{formik.errors.transferDate}</div> : null}
-      </div>
+      </div> */}
             
             <button type="submit">Submit</button>
           </form>

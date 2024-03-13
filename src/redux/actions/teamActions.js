@@ -23,25 +23,51 @@ export const fetchTeams = () => async (dispatch) => {
   }
 };
 
-export const addTeam = (teamData) => async (dispatch) => {
+// export const addTeam = (teamData) => async (dispatch) => {
+//   try {
+//     const response = await axios.post(
+//       `${process.env.REACT_APP_BACKEND_URL}/teams`,
+//       teamData
+//     );
+//     dispatch({
+//       type: ADD_TEAM_SUCCESS,
+//       payload: response.data,
+//     });
+//   } catch (error) {
+//     dispatch({
+//       type: ADD_TEAM_FAILURE,
+//       payload: error.response.data.message, // proveri da li bekend salje poruku o gresci, tj. koji sam exception pokrio?
+//     });
+//   }
+// };
+
+export const addTeam = (teamData, coachId) => async (dispatch) => {
   try {
     const response = await axios.post(
       `${process.env.REACT_APP_BACKEND_URL}/teams`,
       teamData
     );
+    const teamId = response.data.id; 
+
     dispatch({
       type: ADD_TEAM_SUCCESS,
       payload: response.data,
     });
+
+    if (coachId) {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/teams/${teamId}/assign-coach/${coachId}`);
+    }
+
   } catch (error) {
     dispatch({
       type: ADD_TEAM_FAILURE,
-      payload: error.response.data.message, // proveri da li bekend salje poruku o gresci, tj. koji sam exception pokrio?
+      payload: error.response.data.message,
     });
   }
-};
+}
 
-export const editTeam = (id, teamData) => async (dispatch) => {
+
+export const editTeam = (id, teamData, coachId) => async (dispatch) => {
   try {
     const response = await axios.put(
       `${process.env.REACT_APP_BACKEND_URL}/teams/${id}`,
@@ -51,11 +77,14 @@ export const editTeam = (id, teamData) => async (dispatch) => {
       type: EDIT_TEAM_SUCCESS,
       payload: response.data,
     });
+    if(coachId) {
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/teams/${id}/assign-coach/${coachId}`);
+    }
   } catch (error) {
-    dispatch({
-      type: EDIT_TEAM_FAILURE,
-      payload: error.response.data.message,
-    });
+    if (error.response && error.response.data.message.includes("Coach is already assigned")) {
+    } else {
+      dispatch({ type: EDIT_TEAM_FAILURE, payload: error.response ? error.response.data.message : error.message });
+    }
   }
 };
 

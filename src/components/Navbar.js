@@ -16,6 +16,7 @@ function Navbar() {
   const [isTeamsDropdownActive, setIsTeamsDropdownActive] = useState(false);
   const [isRefereesDropdownActive, setIsRefereesDropdownActive] = useState(false);
   const [isPlayersDropdownActive, setIsPlayersDropdownActive] = useState(false);
+  const [isCoachesDropdownActive, setIsCoachesDropdownActive] = useState(false);
 
   const toggleMusic = () => {
     if (playing) {
@@ -102,6 +103,28 @@ function Navbar() {
             </ul>
           )}
         </li>
+
+        <li className="dropdown" onMouseEnter={() => setIsCoachesDropdownActive(true)} onMouseLeave={() => setIsCoachesDropdownActive(false)} >
+          <Link to="/coaches" onClick={() => setIsActive(false)}>
+            Coaches
+          </Link>
+          {isCoachesDropdownActive && (
+            <ul className="dropdown-menu">
+              <li>
+                <Link to="/add-coach" onClick={() => {setIsActive(false); setIsCoachesDropdownActive(false); }} >
+                  Add Coach
+                </Link>
+              </li>
+              <li>
+                <Link to="/edit-delete-coach" onClick={() => {setIsActive(false); setIsCoachesDropdownActive(false); }} >
+                  Edit / Delete Coach
+                </Link>
+              </li>
+            </ul>
+          )}
+        </li>
+
+
 
         
         {isHomePage && (
