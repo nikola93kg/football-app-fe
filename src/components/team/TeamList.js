@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams } from '../../redux/actions/teamActions';
 import "../../styles/team/TeamList.css"
+import Loading from '../Loading';
 
 function TeamList() {
 
@@ -12,8 +13,8 @@ function TeamList() {
         dispatch(fetchTeams());
     }, [dispatch])
 
-    if (loading) return <div>Loading...</div>
     if (error) return <div>Error: {error}</div>
+    if (loading) return <Loading /> // Ne zaboravi da imas wrapper klasu za suspense
 
     const sortedTeams = teams.sort((a, b) => a.name.localeCompare(b.name));
 

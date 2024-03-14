@@ -33,7 +33,11 @@
   .navbar-links {
     list-style: none;
     display: flex;
-    margin: 0 20px 0 0;
+    border-radius: 5px;
+    margin-right: 50px;
+    li {
+      position: relative;
+    }
   }
   
   .navbar-links li a {
@@ -45,17 +49,26 @@
   
   .navbar-links li a:hover,
   .navbar-links li .dropdown a:hover {
-    background-color: #0001;
+    background-color: #fff7;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
 
   .dropdown-menu {
     display: block;
     position: absolute;
-    background-color: #333;
+    left: 50%;
+    transform: translateX(-50%);
+    background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2),
+      rgba(0, 0, 0, 1)
+    ), url("../assets/navbackground.jpg");
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     padding: 1rem;
     z-index: 1;
     list-style-type: none;
+    width: max-content;
   }
   
   .dropdown-menu li a {
@@ -66,7 +79,7 @@
   }
   
   .dropdown-menu li a:hover {
-    background-color: #555;
+    background-color: #fff7;
   }
 
   .navbar-toggle {

@@ -44,46 +44,32 @@ function AddReferee() {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="add-referee-container">
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.name}
-        />
-        {formik.errors.name ? <div>{formik.errors.name}</div> : null}
-      </div>
+    <div className="add-referee-container">
+    <form onSubmit={formik.handleSubmit}>
+        <h2>Add New Referee</h2>
+          <div>
+            <label htmlFor="name">Name</label>
+            <input id="name" name="name" type="text" onChange={formik.handleChange} value={formik.values.name} />
+            {formik.errors.name ? <div className="error">{formik.errors.name}</div> : null}
+          </div>
 
-      <div>
-        <label htmlFor="age">Age</label>
-        <input
-          id="age"
-          name="age"
-          type="number"
-          onChange={formik.handleChange}
-          value={formik.values.age}
-        />
-        {formik.errors.age ? <div>{formik.errors.age}</div> : null}
-      </div>
+          <div>
+            <label htmlFor="age">Age</label>
+            <input id="age" name="age" type="number" onChange={formik.handleChange} value={formik.values.age} />
+            {formik.errors.age ? <div className="error">{formik.errors.age}</div> : null}
+          </div>
 
-      <div>
-        <label htmlFor="nationality">Nationality</label>
-        <input
-          id="nationality"
-          name="nationality"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.nationality}
-        />
-        {formik.errors.nationality ? (
-          <div>{formik.errors.nationality}</div>
-        ) : null}
-      </div>
-      <button type="submit">Submit</button>
-    </form>
+          <div>
+            <label htmlFor="nationality">Nationality</label>
+            <input id="nationality" name="nationality" type="text" onChange={formik.handleChange} value={formik.values.nationality} />
+            {formik.errors.nationality ? (
+              <div className="error">{formik.errors.nationality}</div>
+            ) : null}
+          </div>
+          <button className="submit-btn" type="submit">Submit</button>
+      </form>
+    </div> 
+    
   );
 }
 

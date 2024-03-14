@@ -3,6 +3,7 @@ import "../styles/HomePage.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { playMusic, pauseMusic } from "../redux/actions/musicActions"
 import pes6 from "../assets/mainMenu.mp3"
+import Loading from '../components/Loading'
 
 function HomePage() {
 
@@ -39,7 +40,9 @@ function HomePage() {
   }, [dispatch, audio]);
 
   return (
-    <div className='homepage-container'></div>
+    <div className='homepage-container'>
+      <Loading />
+    </div>
   )
 }
 

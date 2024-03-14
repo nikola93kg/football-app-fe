@@ -76,8 +76,9 @@ function AddPlayer() {
 
       return (
         <div className="add-player-container">
-          <h2>Add New Player</h2>
           <form onSubmit={formik.handleSubmit}>
+          <h2>Add New Player</h2>
+
             <div className="form-group">
               <label htmlFor="name">Name</label>
               <input id="name" name="name" type="text" onChange={formik.handleChange} value={formik.values.name} />
@@ -141,7 +142,7 @@ function AddPlayer() {
         {formik.errors.transferDate ? <div className="error">{formik.errors.transferDate}</div> : null}
       </div> */}
             
-            <button type="submit">Submit</button>
+            <button className='submit-btn' type="submit">Submit</button>
           </form>
         </div>
       );

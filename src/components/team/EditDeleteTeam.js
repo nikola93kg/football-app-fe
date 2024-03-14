@@ -7,6 +7,7 @@ import { MdDelete } from "react-icons/md";
 import { fetchCoaches } from "../../redux/actions/coachActions";
 import Modal from "../Modal";
 import "../../styles/team/EditTeam.css";
+import Loading from "../Loading";
 
 function EditTeam() {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ function EditTeam() {
       })
       .catch((error) => {
         console.log(error);
-        toast.error("Something went wrong");
+        toast.error("Coach is already assigned");
       });
   };
 
@@ -59,15 +60,17 @@ function EditTeam() {
 
   const coaches = useSelector((state) => state.coach.coaches);
 
+  const sortedTeams = teams.sort((a, b) => a.name.localeCompare(b.name));
+
   if (!teams.length) {
-    return <div>Loading teams...</div>; // TODO: Napravi spinner (loader) i koristi <suspense>
+    return <Loading /> // TODO: Napravi spinner (loader) i koristi <suspense>
   }
 
   return (
     <div className="edit-team-container">
       <h2>Select a Team to Edit</h2>
       <ul>
-        {teams.map((team) => (
+        {sortedTeams.map((team) => (
           <li key={team.id}>
             {team.name}
             <div className="buttons">

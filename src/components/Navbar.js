@@ -4,6 +4,8 @@ import logo2 from "../assets/logo2.png";
 import "../styles/Navbar.css";
 import { playMusic, pauseMusic } from "../redux/actions/musicActions";
 import { useDispatch, useSelector } from "react-redux";
+import { FaPlay } from "react-icons/fa";
+import { IoMdPause } from "react-icons/io";
 
 // TODO: razmisli o sidebar-u?
 
@@ -129,7 +131,7 @@ function Navbar() {
         
         {isHomePage && (
         <button onClick={toggleMusic} className="music-toggle-btn">
-          {playing ? "Pause" : "Play"}
+          {playing ? <IoMdPause /> : <FaPlay />}
         </button>
       )}
 

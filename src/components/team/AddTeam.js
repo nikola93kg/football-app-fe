@@ -14,6 +14,8 @@ const validationSchema = Yup.object({
   coachId: Yup.string().required('Coach is required'),
 });
 
+// TODO: OBEZBEDI DA COACH KOJI JE VEC ZAUZET NE MOZE DA BUDE DODELJEN NOVOM TIMU!!!
+
 function AddTeam() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,8 +25,6 @@ function AddTeam() {
   }, [dispatch]);
 
   const coaches = useSelector((state) => state.coach.coaches);
-
-  console.log(coaches);
 
   const formik = useFormik({
     initialValues: {
@@ -56,39 +56,22 @@ function AddTeam() {
       <form onSubmit={formik.handleSubmit}>
         <div>
           <label htmlFor="name">Team Name</label>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
-          {/* napravi custom hook za ovakve stvari */}
+          <input id="name" name="name" type="text" onChange={formik.handleChange} value={formik.values.name} />
+          {/* TODO: napravi custom hook za ovakve stvari */}
           {formik.errors.name ? (
             <div className="error">{formik.errors.name}</div>
           ) : null}
         </div>
         <div>
           <label htmlFor="logo">Team Logo URL</label>
-          <input
-            id="logo"
-            name="logo"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.logo}
-          />
+          <input id="logo" name="logo" type="text" onChange={formik.handleChange} value={formik.values.logo} />
           {formik.errors.logo ? (
             <div className="error">{formik.errors.logo}</div>
           ) : null}
         </div>
-        <div>
+        <div className="select-coach">
           <label htmlFor="coachId">Coach</label>
-          <select
-            id="coachId"
-            name="coachId"
-            onChange={formik.handleChange}
-            value={formik.values.coachId}
-          >
+          <select id="coachId" name="coachId" onChange={formik.handleChange} value={formik.values.coachId} >
             <option value="">Select a coach</option>
             {coaches.map((coach) => (
               <option key={coach.id} value={coach.id}>
@@ -101,7 +84,7 @@ function AddTeam() {
           )}
         </div>
 
-        <button type="submit">Submit</button>
+        <button className="submit-btn" type="submit">Submit</button>
       </form>
     </div>
   );

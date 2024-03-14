@@ -1,59 +1,57 @@
 .add-player-container {
-  background-color: #fff9;
   margin: 0 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 0 50px 0;
-  button {
-    margin-top: 20px;
-    width: 150px;
-    padding: 10px 15px;
-    border: none;
+  form {
+    background-image: linear-gradient(#ffffffef, #302f2faf),
+      url(https://img.bleacherreport.net/img/images/photos/002/100/421/hi-res-158391617_crop_north.jpg?1358218916&w=3072&h=2048);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    transition: background-color 0.3s;
-    &:hover {
-      cursor: pointer;
-      background-color: #0056b3;
+    box-shadow: #fffefec9 0px 0px 15px;
+    padding: 30px 50px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 500px;
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      font-size: large;
+      font-weight: 500;
+      input {
+        margin: 10px 0;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.87);
+        padding: 7px;
+      }
+      select {
+        margin-bottom: 10px;
+        cursor: pointer;
+        padding: 7px;
+        border: none;
+        border-radius: 5px;
+      }
+      .positions-select {
+        margin: 10px 0;
+        cursor: pointer;
+        padding: 7px;
+        border: none;
+        border-radius: 5px;
+        height: 150px;
+      }
     }
   }
-}
-
-.form-group {
-  width: 100%;
-  margin-bottom: 20px;
-  margin: auto;
-  select {
-    margin-bottom: 10px;
-    width: 100%;
-    cursor: pointer;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-  }
-  .positions-select {
-    display: flex;
-    margin: auto;
-    margin-bottom: 10px;
-    width: 100%;
-    cursor: pointer;
-    padding: 5px;
-    border: none;
-    border-radius: 5px;
-    height: 150px;
-  }
-}
-
-.form-group input {
-  width: 100%;
-  margin: 10px 0;
-  border: none;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.87);
-  padding: 7px;
 }
 
 .error {

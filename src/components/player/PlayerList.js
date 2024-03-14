@@ -18,6 +18,7 @@ const PlayersList = () => {
   return (
     <div className="players-list-container">
       <h2>All Players</h2>
+      {/* TODO: Napravi paginaciju za tabelu jer ce biti mnogo igraca */}
       <table>
         <thead>
           <tr>

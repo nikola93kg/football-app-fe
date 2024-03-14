@@ -7,16 +7,17 @@ import TeamList from './components/team/TeamList';
 import AddTeam from "./components/team/AddTeam";
 import Navbar from './components/Navbar';
 import "./styles/App.css"
-import EditTeam from './components/team/EditTeam';
+import EditDeleteTeam from './components/team/EditDeleteTeam';
 import AddReferee from './components/referee/AddReferee';
 import RefereeList from './components/referee/RefereeList';
-import EditReferee from './components/referee/EditReferee';
+import EditDeleteReferee from './components/referee/EditDeleteReferee';
 import AddPlayer from './components/player/AddPlayer';
 import PlayersList from './components/player/PlayerList';
 import EditDeletePlayer from './components/player/EditDeletePlayer';
 import CoachList from './components/coach/CoachList';
 import AddCoach from './components/coach/AddCoach';
 import EditDeleteCoach from './components/coach/EditDeleteCoach';
+import TeamListWrapper from './components/team/TeamListWrapper';
 
 function App() {
   return (
@@ -27,10 +28,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/teams" element={<TeamList />} />
         <Route path="/add-team" element={<AddTeam />} />
-        <Route path='/edit-team' element={<EditTeam />} />
+        <Route path='/edit-team' element={<EditDeleteTeam />} />
         <Route path='/referees' element={<RefereeList />} />
         <Route path='/add-referee' element={<AddReferee />} />
-        <Route path='/edit-referee' element={<EditReferee />} />
+        <Route path='/edit-referee' element={<EditDeleteReferee />} />
         <Route path='/add-player' element={<AddPlayer />} />
         <Route path='/players' element={<PlayersList />} />
         <Route path='/edit-delete-player' element={<EditDeletePlayer />} />

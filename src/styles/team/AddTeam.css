@@ -6,10 +6,10 @@
     height: var(--container-height);
     form {
         background-color: var(--background-color-form);
-        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.897), rgba(10, 10, 10, 0.74)), url(https://i.ebayimg.com/images/g/xnMAAOSwuNNjRHMp/s-l1600.jpg);
+        background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.87), rgba(167, 167, 167, 0.89)), url(https://i.ebayimg.com/images/g/xnMAAOSwuNNjRHMp/s-l1600.jpg);
         background-position: center;
         background-size: cover;
-        box-shadow: var(--box-shadow);
+        box-shadow: rgba(255, 254, 254, 0.788) 0px 10px 25px;
         width: var(--form-width);
         height: var(--form-height);
         border-radius: 50%;
@@ -22,26 +22,26 @@
         text-align: center;
         font-size: large;
         font-weight: 500;
-        input {
-            width: 100%;
-            margin: var(--input-margin);
-            border: none;
-            border-radius: var(--border-radius-5);
-            background-color: rgba(255, 255, 255, 0.87);
-            padding: 7px;
+        div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 90%;
+            margin: 10px 0;
+            input {
+                background-color: #ffffffde;
+                padding: 7px;
+                width: 90%;
+                margin-top: 5px;
+            }
         }
-        button {
-            margin-top: var(--button-margin-top);
-            width: var(--button-width);
-            padding: var(--button-padding);
-            border: none;
-            border-radius: var(--border-radius-5);
-            background-color: var(--button-background-color);
-            color: #fff;
-            transition: all var(--transition-duration);
-            &:hover {
-                cursor: pointer;
-                background-color: var(--button-hover-background-color);
+        .select-coach {
+            select {
+                padding: 5px;
+                margin-top: 5px;
+                background-color: #ffffffde;
+                width: 94%;
             }
         }
     }

@@ -4,60 +4,29 @@
     justify-content: center;
     align-items: center;
     background-color: #fff6;
-    margin: 0 100px;
+    margin: var(--container-margin);
     ul {
         list-style-type: none;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        padding-left: 0;
     }
     li {
-        margin: 15px 0;
         box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-        padding: 5px;
+        padding: 5px 10px;
+        margin: 5px auto;
         border-radius: 5px;
         display: flex;
         justify-content: space-between;
-        width: 500px;
+        align-items: center;
+        width: 450px;
         background-color: #fff9;
     }
     .buttons {
         display: flex;
         justify-content: center;
         align-items: center;
-        .edit-btn {
-            font-size: 1.3em;
-            border: none;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: #fff;
-            transition: 0.4s all;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            &:hover {
-                background-color: #0371e6;
-                cursor: pointer;
-            }
-        }
-        .delete-btn {
-            margin-left: 10px;
-            font-size: 1.3em;
-            padding: 5px;
-            border: none;
-            border-radius: 5px;
-            background-color: #e43e4cd8;
-            color: #fff;
-            transition: 0.4s all;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            width: 100%;
-            &:hover {
-                background-color: #ee0b16;
-                cursor: pointer;
-            }
-        }
     }
     
 }
