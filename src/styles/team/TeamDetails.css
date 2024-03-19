@@ -1,27 +1,80 @@
 .team-details-container {
-    margin: var(--container-margin);
-}
-
-.team-details-card {
-    background-color: #fff9;
-    padding: 50px 0;
+  margin: var(--container-margin);
+  background-color: #fff9;
+  display: grid;
+  height: 100%;
+  .team-details-card {
     display: flex;
-    justify-content: space-around;
-    .team {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        img {
-            height: 300px;
-            width: auto;
-        }
+    justify-content: space-between;
+  }
+  .team-header {
+    background-image: linear-gradient(
+        180deg,
+        rgba(248, 248, 248, 0.062),
+        rgba(0, 0, 0, 1)
+      ),
+      url("../../assets/navbackground.jpg");
+    /* background-position: top; */
+    color: #ffffff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    img {
+      max-height: 200px;
+      padding: 40px;
+      background-color: #fff;
+      border-radius: 25%;
     }
     h2 {
-        margin-top: 0;
+      margin: 10px 0 0;
+      font-size: 24px;
     }
-    .team-details {
-        h3 {
-            margin: 5px 0;
-        }
+    .coach-details {
+      padding: 0;
+      width: 100%;
+      h3 {
+        color: #000;
+        background-color: #fafafa;
+        margin-bottom: 15px;
+        padding: 5px;
+      }
+      p {
+        font-weight: 400;
+        font-size: 1.3em;
+      }
     }
+  }
+}
+
+.players-list {
+  flex: 2;
+  align-self: center;
+  h3 {
+    background-color: #fafafa;
+    margin-bottom: 15px;
+    padding: 5px 20px;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0 20px;
+  }
+  li {
+    border-bottom: 2px solid #ddd;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+
+.players-list li:last-child {
+  border-bottom: none;
+}
+
+.player-name {
+  font-weight: bold;
 }

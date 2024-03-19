@@ -11,6 +11,9 @@ import {
   FETCH_TEAM_DETAILS_REQUEST,
   FETCH_TEAM_DETAILS_SUCCESS,
   FETCH_TEAM_DETAILS_FAILURE,
+  FETCH_TEAM_COACH_REQUEST,
+  FETCH_TEAM_COACH_SUCCESS,
+  FETCH_TEAM_COACH_FAILURE 
 } from "../types/types";
 import axios from "axios";
 
@@ -35,6 +38,16 @@ export const fetchTeamDetails = (id) => async (dispatch) => {
     dispatch({ type: FETCH_TEAM_DETAILS_SUCCESS, payload: response.data });
   } catch (error) {
     dispatch({ type: FETCH_TEAM_DETAILS_FAILURE, payload: error.message });
+  }
+};
+
+export const fetchTeamCoach = (teamId) => async (dispatch) => {
+  try {
+    dispatch({ type: FETCH_TEAM_COACH_REQUEST });
+    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/teams/${teamId}/coach`);
+    dispatch({ type: FETCH_TEAM_COACH_SUCCESS, payload: response.data });
+  } catch (error) {
+    dispatch({ type: FETCH_TEAM_COACH_FAILURE, payload: error.message });
   }
 };
 

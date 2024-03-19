@@ -11,6 +11,9 @@ import {
   FETCH_TEAM_DETAILS_REQUEST,
   FETCH_TEAM_DETAILS_SUCCESS,
   FETCH_TEAM_DETAILS_FAILURE,
+  FETCH_TEAM_COACH_REQUEST,
+  FETCH_TEAM_COACH_SUCCESS,
+  FETCH_TEAM_COACH_FAILURE,
 } from "../types/types";
 
 const initialState = {
@@ -20,7 +23,6 @@ const initialState = {
 };
 
 export const teamReducer = (state = initialState, action) => {
-  console.log("zanima me sta je sve ovde: ", action);
   switch (action.type) {
     case FETCH_TEAMS_REQUEST:
       return { ...state, loading: true };
@@ -34,6 +36,12 @@ export const teamReducer = (state = initialState, action) => {
       return { ...state, loading: false, teamDetails: action.payload };
     case FETCH_TEAM_DETAILS_FAILURE:
       return { ...state, loading: false, error: action.payload };
+    case FETCH_TEAM_COACH_REQUEST:
+      return { ...state, loadingCoach: true };
+    case FETCH_TEAM_COACH_SUCCESS:
+      return { ...state, loadingCoach: false, coachDetails: action.payload };
+    case FETCH_TEAM_COACH_FAILURE:
+      return { ...state, loadingCoach: false, error: action.payload };
     case ADD_TEAM_SUCCESS:
       return {
         ...state,
