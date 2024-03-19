@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchTeams } from '../../redux/actions/teamActions';
 import "../../styles/team/TeamList.css"
 import Loading from '../Loading';
+import { Link } from 'react-router-dom';
 
 function TeamList() {
 
@@ -23,10 +24,12 @@ function TeamList() {
           <h1>Teams</h1>
           <div className='team-list-container'>
           {sortedTeams.map(team => (
-            <div key={team.id} className='team-cards'> 
+            <Link to={`/teams/${team.id}`} key={team.id} style={{ textDecoration: 'none' }}>
+            <div className='team-cards'> 
               <h3>{team.name}</h3>
               <img src={team.logo} />
             </div>
+            </Link>
           ))}
         </div>
       </>

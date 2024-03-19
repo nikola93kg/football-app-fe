@@ -9,7 +9,7 @@ import {
   EDIT_PLAYER_FAILURE,
   DELETE_PLAYER_SUCCESS,
   DELETE_PLAYER_FAILURE,
-  FETCH_PLAYER_POSITIONS_SUCCESS
+  FETCH_PLAYER_POSITIONS_SUCCESS,
 } from "../types/types";
 
 const fetchPlayersRequest = () => {
@@ -42,7 +42,7 @@ export const fetchPlayers = () => async (dispatch) => {
 //     dispatch({
 //       type: ADD_PLAYER_SUCCESS,
 //       payload: response.data,
-//     }) 
+//     })
 //     dispatch(fetchPlayers()); // videcu da li da ponovo fetchujem igrace
 //   } catch (error) {
 //     dispatch({ type: ADD_PLAYER_FAILURE, payload: error.message });
@@ -56,24 +56,24 @@ export const addPlayer = (playerData) => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_URL}/players`,
       playerData
     );
-    if (response.status === 200 || response.status === 201) { // Proverite statusni kod
-      console.log('Podaci koji prolaze:', response.data);
+    if (response.status === 200 || response.status === 201) { // proveri u postmanu examples!
+      console.log("Podaci koji prolaze:", response.data);
       dispatch({
         type: ADD_PLAYER_SUCCESS,
         payload: response.data,
       });
-      dispatch(fetchPlayers()); // Ovo može da osveži listu igrača
+      dispatch(fetchPlayers());
     } else {
-      throw new Error('Failed to add player');
+      throw new Error("Failed to add player");
     }
   } catch (error) {
     dispatch({ type: ADD_PLAYER_FAILURE, payload: error.message });
-    throw error; 
+    throw error;
   }
 };
 
 export const editPlayer = (id, playerData) => async (dispatch) => {
-  console.log("isprati ovo", playerData)
+  console.log("isprati ovo", playerData);
   dispatch(fetchPlayersRequest());
   try {
     const response = await axios.put(
@@ -104,13 +104,15 @@ export const deletePlayer = (id) => async (dispatch) => {
 };
 
 export const fetchPlayerPositions = () => async (dispatch) => {
-    try {
-      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/players/positions`);
-      dispatch({
-        type: FETCH_PLAYER_POSITIONS_SUCCESS,
-        payload: response.data,
-      });
-    } catch (error) {
-      console.error('Error fetching player positions:', error);
-    }
-  };
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/players/positions`
+    );
+    dispatch({
+      type: FETCH_PLAYER_POSITIONS_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.error("Error fetching player positions:", error);
+  }
+};

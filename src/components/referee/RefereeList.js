@@ -37,6 +37,6 @@ const RefereeList = () => {
         </div>
       </div>
     );
-};
+}
 
 export default RefereeList;

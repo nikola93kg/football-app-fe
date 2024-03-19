@@ -1,5 +1,4 @@
 export const formatPlayerPositions = (positions) => {
-  // Provera da li je positions niz i formatiranje svake pozicije u nizu
   if (Array.isArray(positions)) {
     return positions
       .map(position => 
@@ -8,8 +7,7 @@ export const formatPlayerPositions = (positions) => {
           .split('_')
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ')
-      ).join(', '); // Spajanje formatiranih pozicija u jedan string razdvojen zarezima
+      ).join(', ');
   }
-  // Ukoliko positions nije niz, vraća prazan string ili neku default vrednost
-  return '';
+  return ''; // ako positions nije niz vratice prazan string
 };

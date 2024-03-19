@@ -8,7 +8,7 @@ import {
   EDIT_PLAYER_FAILURE,
   DELETE_PLAYER_SUCCESS,
   DELETE_PLAYER_FAILURE,
-  FETCH_PLAYER_POSITIONS_SUCCESS
+  FETCH_PLAYER_POSITIONS_SUCCESS,
 } from "../types/types";
 
 const initialState = {
@@ -72,14 +72,13 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         error: action.payload,
       };
-      case FETCH_PLAYER_POSITIONS_SUCCESS:
+    case FETCH_PLAYER_POSITIONS_SUCCESS:
       return {
         ...state,
         positions: action.payload,
       };
     default:
       return state;
-      
   }
 };
 

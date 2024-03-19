@@ -1,4 +1,3 @@
-// TeamListWrapper.js
 import React, { Suspense, lazy } from 'react';
 import Loading from '../Loading';
 

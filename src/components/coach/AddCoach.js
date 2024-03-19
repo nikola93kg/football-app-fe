@@ -47,6 +47,7 @@ function AddCoach() {
         },
     });
 
+
     return (
         <div className="add-coach-container">
             <h2>Add New Coach</h2>

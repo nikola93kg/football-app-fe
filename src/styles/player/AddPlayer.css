@@ -12,7 +12,7 @@
     background-attachment: fixed;
     background-repeat: no-repeat;
     border-radius: 5px;
-    box-shadow: #fffefec9 0px 0px 15px;
+    /* box-shadow: #fffefec9 0px 0px 15px; */
     padding: 30px 50px;
     margin: 50px auto;
     display: flex;

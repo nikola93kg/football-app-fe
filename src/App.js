@@ -18,6 +18,7 @@ import CoachList from './components/coach/CoachList';
 import AddCoach from './components/coach/AddCoach';
 import EditDeleteCoach from './components/coach/EditDeleteCoach';
 import TeamListWrapper from './components/team/TeamListWrapper';
+import TeamDetails from './components/team/TeamDetails';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/teams" element={<TeamList />} />
         <Route path="/add-team" element={<AddTeam />} />
         <Route path='/edit-team' element={<EditDeleteTeam />} />
+        <Route path='/teams/:id' element={<TeamDetails />} />
         <Route path='/referees' element={<RefereeList />} />
         <Route path='/add-referee' element={<AddReferee />} />
         <Route path='/edit-referee' element={<EditDeleteReferee />} />

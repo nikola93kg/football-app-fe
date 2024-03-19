@@ -7,7 +7,7 @@ import Loading from '../components/Loading'
 
 function HomePage() {
 
-  // razmisli o tome da ova tema ide kroz celu app?
+  // razmisli o tome da ova tema (pesma) ide kroz celu app?
 
   const dispatch = useDispatch();
   const isPlaying = useSelector(state => state.music.playing);
@@ -41,7 +41,7 @@ function HomePage() {
 
   return (
     <div className='homepage-container'>
-      <Loading />
+      {/* <Loading /> */}
     </div>
   )
 }
