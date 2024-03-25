@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo2 from "../assets/logo2.png";
-import "../styles/Navbar.css";
-import { playMusic, pauseMusic } from "../redux/actions/musicActions";
+import logo2 from "../../assets/logo2.png";
+import "../../styles/Navbar.css";
+import { playMusic, pauseMusic } from "../../redux/actions/musicActions";
 import { useDispatch, useSelector } from "react-redux";
 import { FaPlay } from "react-icons/fa";
 import { IoMdPause } from "react-icons/io";

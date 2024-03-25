@@ -5,6 +5,7 @@ import { refereeReducer } from '../reducers/refereeReducer';
 import playerReducer from '../reducers/playerReducer';
 import musicReducer from '../reducers/musicReducer';
 import coachReducer from "../reducers/coachReducer"
+import sidebarReducer from '../reducers/sidebarReducer';
 
 const rootReducer = combineReducers({
   team: teamReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   music: musicReducer,
   player: playerReducer,
   coach: coachReducer,
+  sidebar: sidebarReducer,
   
 })
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { editPlayer, fetchPlayers, deletePlayer } from "../../redux/actions/playerActions";
+import { editPlayer, fetchPlayers, deletePlayer, fetchPlayerPositions } from "../../redux/actions/playerActions";
 import { fetchTeams } from "../../redux/actions/teamActions";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
@@ -16,6 +16,7 @@ const PlayerSchema = Yup.object().shape({
   nationality: Yup.string().required("Nationality is required"),
   jerseyNumber: Yup.number().required("Jersey Number is required").positive().integer(),
   teamName: Yup.string().required("Team Name is required"),
+  positions: Yup.array().of(Yup.string()).required("Position is required"),
 });
 
 // TODO: Sortiraj klubove po abecedi kada se otvori modal za editovanje
@@ -28,10 +29,14 @@ function EditDeletePlayer() {
   useEffect(() => {
     dispatch(fetchPlayers());
     dispatch(fetchTeams());
+    dispatch(fetchPlayerPositions());
   }, [dispatch]);
 
   const players = useSelector(state => state.player.players);
   const teams = useSelector(state => state.team.teams);
+  const positions = useSelector(state => state.player.positions || ["Position not found"]);
+
+  console.log("provera pozicija: ",positions)
 
   const handleDelete = (id) => {
     dispatch(deletePlayer(id))
@@ -88,6 +93,7 @@ function EditDeletePlayer() {
               jerseyNumber: editingPlayer.jerseyNumber,
               teamName: editingPlayer.teamName || '',
               teamId: editingPlayer.teamId || '',
+              positions: editingPlayer.positions || [],
             }}
             validationSchema={PlayerSchema}
             onSubmit={(values) => {
@@ -135,6 +141,34 @@ function EditDeletePlayer() {
                     <div>{errors.teamId}</div>
                   ) : null}
               </div>
+
+              <div className="option-select">
+                <label htmlFor="positions">Position</label>
+                <Field as="select" name="positions" multiple onChange={event => {
+                        const options = event.target.options;
+                        const value = [];
+                        for (let i = 0, l = options.length; i < l; i++) {
+                          if (options[i].selected) {
+                            value.push(options[i].value);
+                          }
+                        }
+                        setFieldValue("positions", value);
+                      }}>
+                  {editingPlayer.positions && editingPlayer.positions.map((position, index) => (
+                    <option key={index} value={position} selected>
+                      {position}
+                    </option>
+                  ))}
+                  {positions.map((position, index) => (
+                    !editingPlayer.positions.includes(position) && (
+                      <option key={index} value={position}>
+                        {position}
+                      </option>
+                    )
+                  ))}
+                </Field>
+              </div>
+
                 
                 <button type="submit">Save Changes</button>
               </Form>

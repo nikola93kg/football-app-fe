@@ -9,6 +9,9 @@ import {
   DELETE_PLAYER_SUCCESS,
   DELETE_PLAYER_FAILURE,
   FETCH_PLAYER_POSITIONS_SUCCESS,
+  SEARCH_PLAYERS_REQUEST,
+  SEARCH_PLAYERS_SUCCESS,
+  SEARCH_PLAYERS_FAILURE  
 } from "../types/types";
 
 const initialState = {
@@ -76,6 +79,24 @@ const playerReducer = (state = initialState, action) => {
       return {
         ...state,
         positions: action.payload,
+      };
+    case SEARCH_PLAYERS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case SEARCH_PLAYERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        players: action.payload,
+        error: "",
+      };
+    case SEARCH_PLAYERS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

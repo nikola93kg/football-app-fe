@@ -2,7 +2,8 @@
   margin: var(--container-margin);
   background-color: #fff9;
   display: grid;
-  height: 100%;
+  height: calc(100vh - var(--navbar-height));
+  height: 100vh;
   .team-details-card {
     display: flex;
     justify-content: space-between;
@@ -52,6 +53,7 @@
 .players-list {
   flex: 2;
   align-self: center;
+  height: 100%;
   h3 {
     background-color: #fafafa;
     margin-bottom: 15px;

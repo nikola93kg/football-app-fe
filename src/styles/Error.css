@@ -1,0 +1,49 @@
+.error-container {
+  background-color: #272727b0;
+  height: 100vh;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .error-num {
+    font-size: 8em;
+  }
+  .eye {
+    background: #fff;
+    border-radius: 50%;
+    display: inline-block;
+    height: 100px;
+    position: relative;
+    width: 100px;
+    &::after {
+      background-image: url(https://www.magliecalciatori.com/1654-medium_default/adidas-ball-the-kiev-final-champions-league-2017-18.jpg);
+      background-position: center;
+      background-size: cover;
+      border-radius: 50%;
+      bottom: 56.1px;
+      content: "";
+      height: 33px;
+      position: absolute;
+      right: 33px;
+      width: 33px;
+      padding: 1px;
+    }
+  }
+  .error-text {
+    p {
+        margin-bottom: 1em;
+        font-size: 1.7em;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+        &:hover {
+          color: lightgray;
+        }
+      }
+  }
+
+}

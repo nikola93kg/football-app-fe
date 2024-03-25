@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-  fetchTeamCoach,
-  fetchTeamDetails,
-} from "../../redux/actions/teamActions";
+import { fetchTeamCoach, fetchTeamDetails } from "../../redux/actions/teamActions";
 import Loading from "../Loading";
 import "../../styles/team/TeamDetails.css";
 
@@ -21,9 +18,9 @@ function TeamDetails() {
     }
   }, [dispatch, id]);
 
-  if (loading) return <Loading />;
-  if (error) return <div className="error-message">Error: {error}</div>;
-  if (!teamDetails) return <Loading />;
+  if (loading) return <Loading />
+  if (error) return <div className="error-message">Error: {error}</div>
+  if (!teamDetails) return <Loading />
 
   return (
     <div className="team-details-container">

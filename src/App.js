@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import HomePage from "./pages/HomePage";
 import TeamList from './components/team/TeamList';
 import AddTeam from "./components/team/AddTeam";
-import Navbar from './components/Navbar';
+import Navbar from './components/navigation/Navbar';
 import "./styles/App.css"
 import EditDeleteTeam from './components/team/EditDeleteTeam';
 import AddReferee from './components/referee/AddReferee';
@@ -19,11 +19,14 @@ import AddCoach from './components/coach/AddCoach';
 import EditDeleteCoach from './components/coach/EditDeleteCoach';
 import TeamListWrapper from './components/team/TeamListWrapper';
 import TeamDetails from './components/team/TeamDetails';
+import Sidebar from './components/navigation/Sidebar';
+import Submenu from './components/navigation/Submenu';
 
 function App() {
   return (
     <div className='main-container'>
       <Navbar />
+      {/* <Sidebar /> */}
       <ToastContainer />
       <Routes>
         <Route path="/" element={<HomePage />} />

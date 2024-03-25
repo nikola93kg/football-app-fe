@@ -10,6 +10,9 @@ import {
   DELETE_PLAYER_SUCCESS,
   DELETE_PLAYER_FAILURE,
   FETCH_PLAYER_POSITIONS_SUCCESS,
+  SEARCH_PLAYERS_REQUEST,
+  SEARCH_PLAYERS_SUCCESS,
+  SEARCH_PLAYERS_FAILURE,
 } from "../types/types";
 
 const fetchPlayersRequest = () => {
@@ -30,24 +33,29 @@ export const fetchPlayers = () => async (dispatch) => {
   }
 };
 
-// export const addPlayer = (playerData) => async (dispatch) => {
-//     console.log('Sta saljem:', playerData);
+export const searchPlayers = (name = '', nationality = '', page = 1, limit = 10) => async (dispatch) => {
+  dispatch({ type: SEARCH_PLAYERS_REQUEST }); 
+  try {
+    const params = new URLSearchParams({ name, nationality, page, limit }).toString();
+    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/players/search?${params}`);
+    console.log("gledaj ovo:", response)
+    dispatch({ type: SEARCH_PLAYERS_SUCCESS, payload: response.data }); 
+  } catch (error) {
+    dispatch({ type: SEARCH_PLAYERS_FAILURE, payload: error.message }); 
+  }
+};
+
+
+// export const fetchPlayersAndSearch = (page = 1, limit = 10, name = '', nationality = '') => async (dispatch) => {
 //   dispatch(fetchPlayersRequest());
 //   try {
-//     const response = await axios.post(
-//       `${process.env.REACT_APP_BACKEND_URL}/players`,
-//       playerData
-//     );
-//     console.log('Podaci koji prolaze:', response.data);
-//     dispatch({
-//       type: ADD_PLAYER_SUCCESS,
-//       payload: response.data,
-//     })
-//     dispatch(fetchPlayers()); // videcu da li da ponovo fetchujem igrace
+//     const params = new URLSearchParams({ page, limit, name, nationality }).toString();
+//     const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/players/search?${params}`);
+//     dispatch({ type: FETCH_PLAYERS_SUCCESS, payload: response.data });
 //   } catch (error) {
-//     dispatch({ type: ADD_PLAYER_FAILURE, payload: error.message });
+//     dispatch({ type: FETCH_PLAYERS_FAILURE, payload: error.message });
 //   }
-// };
+// }
 
 export const addPlayer = (playerData) => async (dispatch) => {
   dispatch(fetchPlayersRequest());
@@ -69,6 +77,20 @@ export const addPlayer = (playerData) => async (dispatch) => {
   } catch (error) {
     dispatch({ type: ADD_PLAYER_FAILURE, payload: error.message });
     throw error;
+  }
+};
+
+export const fetchPlayerPositions = () => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/players/positions`
+    );
+    dispatch({
+      type: FETCH_PLAYER_POSITIONS_SUCCESS,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.error("Error fetching player positions:", error);
   }
 };
 
@@ -103,16 +125,3 @@ export const deletePlayer = (id) => async (dispatch) => {
   }
 };
 
-export const fetchPlayerPositions = () => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/players/positions`
-    );
-    dispatch({
-      type: FETCH_PLAYER_POSITIONS_SUCCESS,
-      payload: response.data,
-    });
-  } catch (error) {
-    console.error("Error fetching player positions:", error);
-  }
-};

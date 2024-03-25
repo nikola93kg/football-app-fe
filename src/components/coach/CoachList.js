@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCoaches } from '../../redux/actions/coachActions';
 import "../../styles/coach/CoachList.css"
+import Loading from '../Loading';
+import Error from '../Error';
 
 const CoachList = () => {
   const dispatch = useDispatch();
@@ -11,8 +13,8 @@ const CoachList = () => {
     dispatch(fetchCoaches());
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <Loading />
+  if (error) return <Error />
 
   return (
     <div className="coaches-list-container">

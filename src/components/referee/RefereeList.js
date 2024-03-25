@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchReferees } from '../../redux/actions/refereeActions';
 import "../../styles/referee/RefereeList.css"
+import Loading from '../Loading';
+import Error from '../Error';
 
 const RefereeList = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,9 @@ const RefereeList = () => {
   useEffect(() => {
     dispatch(fetchReferees());
   }, [dispatch]);
+
+  if (loading) return <Loading />
+  if (error) return <Error />
 
   const filteredReferees = filter
     ? referees.filter((referee) =>
