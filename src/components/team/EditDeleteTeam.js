@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTeams, editTeam, deleteTeam } from "../../redux/actions/teamActions";
+import { fetchTeams, editTeam } from "../../redux/actions/teamActions";
 import { toast } from "react-toastify";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
@@ -8,6 +8,10 @@ import { fetchCoaches } from "../../redux/actions/coachActions";
 import Modal from "../Modal";
 import "../../styles/team/EditTeam.css";
 import Loading from "../Loading";
+import { deleteEntity } from "../../redux/actions/genericActions";
+
+
+// TODO: Mozda neku logiku da premestis u redux?
 
 function EditTeam() {
   const dispatch = useDispatch();
@@ -16,6 +20,8 @@ function EditTeam() {
   const [teamName, setTeamName] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
   const [coachId, setCoachId] = useState("");
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [teamIdToDelete, setTeamIdToDelete] = useState(null);
 
   useEffect(() => {
     if (editingTeam) {
@@ -28,7 +34,7 @@ function EditTeam() {
   const handleEdit = (id, teamData) => {
     dispatch(editTeam(id, teamData, coachId))
       .then(() => {
-        setEditingTeam(null); // TODO: zatvori modal kada kliknes na blank space
+        setEditingTeam(null);
         toast.success("Team successfully updated");
       })
       .catch((error) => {
@@ -43,16 +49,31 @@ function EditTeam() {
     handleEdit(editingTeam.id, updatedTeamData);
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteTeam(id))
-      .then(() => {
-        toast.success("Team successfully deleted");
-      })
-      .catch((error) => {
-        toast.error("Something went wrong with deleting the team");
-      });
+  const handleOpenDeleteModal = (teamId) => {
+    setIsDeleteModalOpen(true);
+    setTeamIdToDelete(teamId);
   };
-
+  
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setTeamIdToDelete(null);
+  };
+  
+  const handleConfirmDelete = () => {
+    if (teamIdToDelete) {
+      dispatch(deleteEntity('teams', teamIdToDelete)) 
+        .then(() => {
+          toast.success("Team successfully deleted");
+          handleCloseDeleteModal();
+          dispatch(fetchTeams()); 
+        })
+        .catch((error) => {
+          toast.error("Something went wrong with deleting the team");
+          handleCloseDeleteModal();
+        });
+    }
+  };
+  
   useEffect(() => {
     dispatch(fetchTeams());
     dispatch(fetchCoaches());
@@ -77,13 +98,21 @@ function EditTeam() {
               <button className="edit-btn" onClick={() => setEditingTeam(team)}>
                 <BiSolidEditAlt />
               </button>
-              <button className="delete-btn" onClick={() => handleDelete(team.id)} >
-                <MdDelete />
-              </button>
+              <button className="delete-btn" onClick={() => handleOpenDeleteModal(team.id)} >
+  <MdDelete />
+</button>
             </div>
           </li>
         ))}
       </ul>
+      {isDeleteModalOpen && (
+  <Modal onClose={handleCloseDeleteModal}>
+    <h2>Are you sure?</h2>
+    <p>Do you really want to delete this team? </p>
+    <button onClick={handleConfirmDelete}>Yes</button>
+  </Modal>
+)}
+
       {editingTeam && (
         <Modal onClose={() => setEditingTeam(null)}>
           <form onSubmit={handleSubmit}>

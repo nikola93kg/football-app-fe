@@ -19,6 +19,8 @@ const CoachSchema = Yup.object().shape({
 function EditDeleteCoach() {
   const dispatch = useDispatch();
   const [editingCoach, setEditingCoach] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [coachIdToDelete, setCoachIdToDelete] = useState(null);
 
   useEffect(() => {
     dispatch(fetchCoaches());
@@ -35,6 +37,32 @@ function EditDeleteCoach() {
         toast.error("Something went wrong with deleting the coach");
       });
   };
+
+  const handleOpenDeleteModal = (coachId) => {
+    setIsDeleteModalOpen(true);
+    setCoachIdToDelete(coachId);
+  };
+  
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+    setCoachIdToDelete(null);
+  };
+  
+  const handleConfirmDelete = () => {
+    if (coachIdToDelete) {
+      dispatch(deleteCoach(coachIdToDelete))
+        .then(() => {
+          setIsDeleteModalOpen(false);
+          toast.success("Coach deleted successfully!");
+          dispatch(fetchCoaches()); 
+        })
+        .catch((error) => {
+          setIsDeleteModalOpen(false);
+          toast.error("Something went wrong with deleting the coach");
+        });
+    }
+  };
+  
 
   if (!coaches.length) {
     return <div>Loading coaches...</div>;
@@ -63,13 +91,24 @@ function EditDeleteCoach() {
               <td>
               <div className="buttons">
                 <button className="edit-btn" onClick={() => setEditingCoach(coach)}><BiSolidEditAlt /></button>
-                <button className="delete-btn" onClick={() => handleDelete(coach.id)}><MdDelete /></button>
+                <button className="delete-btn" onClick={() => handleOpenDeleteModal(coach.id)}><MdDelete /></button>
+
               </div>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {isDeleteModalOpen && (
+  <Modal onClose={handleCloseDeleteModal}>
+    <h2>Are you sure?</h2>
+    <p>Do you really want to delete this coach?</p>
+    <div>
+      <button onClick={handleConfirmDelete}>Yes</button>
+    </div>
+  </Modal>
+)}
+
       {editingCoach && (
         <Modal onClose={() => setEditingCoach(null)}>
           <Formik

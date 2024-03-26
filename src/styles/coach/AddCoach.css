@@ -1,11 +1,13 @@
 .add-coach-container {
     margin: var(--container-margin);
     background-color: #fff9;
+    min-height: calc(100vh - var(--navbar-height));
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     input {
         width: 100%;
+        margin: 10px 0;
     }
 }

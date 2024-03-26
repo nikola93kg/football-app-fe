@@ -15,6 +15,9 @@ function EditReferee() {
     const [refereeName, setRefereeName] = useState('');
     const [refereeAge, setRefereeAge] = useState('');
     const [refereeNationality, setRefereeNationality] = useState('');
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [refereeIdToDelete, setRefereeIdToDelete] = useState(null);
+
 
     useEffect(() => {
         if(editingReferee) {
@@ -50,6 +53,32 @@ function EditReferee() {
         e.preventDefault();
         handleEdit(editingReferee.id, { name: refereeName, age: refereeAge, nationality: refereeNationality });
     };
+
+    const handleOpenDeleteModal = (refereeId) => {
+        setIsDeleteModalOpen(true);
+        setRefereeIdToDelete(refereeId);
+      };
+      
+      const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setRefereeIdToDelete(null);
+      };
+      
+      const handleConfirmDelete = () => {
+        if (refereeIdToDelete) {
+          dispatch(deleteReferee(refereeIdToDelete))
+            .then(() => {
+              dispatch(fetchReferees()); 
+              toast.success("Referee deleted successfully!");
+              handleCloseDeleteModal();
+            })
+            .catch((error) => {
+              toast.error("Something went wrong with deleting the referee");
+              handleCloseDeleteModal();
+            });
+        }
+      };
+      
   
     useEffect(() => {
         dispatch(fetchReferees());
@@ -67,13 +96,20 @@ function EditReferee() {
                     <li key={referee.id}>
                         {referee.name}
                         <div className="buttons">
-                        {/* TODO: Na klik delete dugmeta da izadje modal da pita Are you sure? */}
                             <button className='edit-btn' onClick={() => setEditingReferee(referee)}><BiSolidEditAlt /></button>
-                            <button className='delete-btn' onClick={() => handleDelete(referee.id)}><MdDelete /></button>
+                            <button className='delete-btn' onClick={() => handleOpenDeleteModal(referee.id)}><MdDelete /></button>
                         </div>
                     </li>
                 ))}
             </ul>
+            {isDeleteModalOpen && (
+                <Modal onClose={handleCloseDeleteModal}>
+                    <h2>Are you sure?</h2>
+                    <p>Do you really want to delete this referee?</p>
+                    <button onClick={handleConfirmDelete}>Yes</button>
+                </Modal>
+                )}
+
             {editingReferee && (
                 <Modal onClose={() => setEditingReferee(null)}>
                     <form onSubmit={handleSubmit}>

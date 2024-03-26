@@ -8,8 +8,6 @@ import Error from "../Error";
 import { CiSearch } from "react-icons/ci";
 import { GrPowerReset } from "react-icons/gr";
 import Pagination from "../Pagination";
-import { IoIosArrowDropupCircle } from "react-icons/io";
-
 import "../../styles/player/PlayerList.css";
 
 

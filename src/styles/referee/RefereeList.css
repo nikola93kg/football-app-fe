@@ -1,15 +1,12 @@
 .referee-list-container {
     background-color: #fff9;
-    height: 88.9vh;
-    margin: 0 100px;
+    margin: var(--container-margin);
+    min-height: calc(100vh - var(--navbar-height));
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding: 50px 0;
-    width: 1142px;
-    margin: 0 auto;
-    height: auto;
     h2 {
         margin-top: 0;
     }
@@ -22,24 +19,18 @@
 }
   
   .ag-courses_box {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: start;
-    -ms-flex-align: start;
     align-items: flex-start;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
     padding: 50px 0;
-    width: 90%;
-
+    width: 80%;
   }
   .ag-courses_item {
     -ms-flex-preferred-size: calc(33.33333% - 30px);
     flex-basis: calc(33.33333% - 30px);
     margin: 0 15px 30px;
     overflow: hidden;
-    border-radius: 28px;
+    border-radius: 10px;
   }
   .ag-courses-item_link {
     display: block;
