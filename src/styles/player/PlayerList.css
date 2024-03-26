@@ -62,6 +62,14 @@
       align-items: center;
       margin-top: 0;
     }
+    .reset-btn {
+      margin-left: 5px;
+      font-size: 1.3em;
+      color: #f00;
+      &:hover {
+        color: #004085;
+      }
+    }
   }
   .pagination {
     display: flex;

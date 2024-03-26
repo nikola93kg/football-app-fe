@@ -33,29 +33,21 @@ export const fetchPlayers = () => async (dispatch) => {
   }
 };
 
-export const searchPlayers = (name = '', nationality = '', page = 1, limit = 10) => async (dispatch) => {
-  dispatch({ type: SEARCH_PLAYERS_REQUEST }); 
+export const searchPlayers = (name, nationality) => async (dispatch) => {
+  dispatch({ type: SEARCH_PLAYERS_REQUEST });
   try {
-    const params = new URLSearchParams({ name, nationality, page, limit }).toString();
-    const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/players/search?${params}`);
-    console.log("gledaj ovo:", response)
-    dispatch({ type: SEARCH_PLAYERS_SUCCESS, payload: response.data }); 
+    const response = await axios.get(
+      `${process.env.REACT_APP_BACKEND_URL}/players/search`,
+      {
+        params: { name, nationality },
+      }
+    );
+    console.log("da li ima ovde tima: ", response.data)
+    dispatch({ type: SEARCH_PLAYERS_SUCCESS, payload: response.data });
   } catch (error) {
-    dispatch({ type: SEARCH_PLAYERS_FAILURE, payload: error.message }); 
+    dispatch({ type: SEARCH_PLAYERS_FAILURE, payload: error.message });
   }
 };
-
-
-// export const fetchPlayersAndSearch = (page = 1, limit = 10, name = '', nationality = '') => async (dispatch) => {
-//   dispatch(fetchPlayersRequest());
-//   try {
-//     const params = new URLSearchParams({ page, limit, name, nationality }).toString();
-//     const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/players/search?${params}`);
-//     dispatch({ type: FETCH_PLAYERS_SUCCESS, payload: response.data });
-//   } catch (error) {
-//     dispatch({ type: FETCH_PLAYERS_FAILURE, payload: error.message });
-//   }
-// }
 
 export const addPlayer = (playerData) => async (dispatch) => {
   dispatch(fetchPlayersRequest());
@@ -64,7 +56,8 @@ export const addPlayer = (playerData) => async (dispatch) => {
       `${process.env.REACT_APP_BACKEND_URL}/players`,
       playerData
     );
-    if (response.status === 200 || response.status === 201) { // proveri u postmanu examples!
+    if (response.status === 200 || response.status === 201) {
+      // proveri u postmanu examples!
       console.log("Podaci koji prolaze:", response.data);
       dispatch({
         type: ADD_PLAYER_SUCCESS,
@@ -124,4 +117,3 @@ export const deletePlayer = (id) => async (dispatch) => {
     dispatch({ type: DELETE_PLAYER_FAILURE, payload: error.message });
   }
 };
-

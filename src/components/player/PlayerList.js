@@ -9,6 +9,8 @@ import Error from '../Error';
 import { CiSearch } from "react-icons/ci";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowLeft } from "react-icons/fa";
+import { GrPowerReset } from "react-icons/gr";
+
 
 const PlayersList = () => {
   const dispatch = useDispatch();
@@ -69,16 +71,31 @@ const PlayersList = () => {
     initialState: { pageIndex: 0 }, 
   }, usePagination);
 
-  if (loading) return <Loading />;
-  if (error) return <Error />;
+  if (loading) return <Loading />
+  if (error) return <Error />
+
+  const handleSearchKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      dispatch(searchPlayers(searchName, searchNationality, 1, 10));
+    }
+  }
+
+  const handleReset = () => { 
+    setSearchName("");
+    setSearchNationality("");
+    dispatch(fetchPlayers(1, 10));
+   }
 
   const renderSearch = () => (
     <div className='player-search-box'>
-      <input value={searchName} onChange={e => setSearchName(e.target.value)} placeholder="Search by name" />
-      <input value={searchNationality} onChange={e => setSearchNationality(e.target.value)} placeholder="Search by nationality" />
+      <input value={searchName} onChange={e => setSearchName(e.target.value)} onKeyDown={handleSearchKeyPress} placeholder="Search by name" />
+      <input value={searchNationality} onChange={e => setSearchNationality(e.target.value)} onKeyDown={handleSearchKeyPress} placeholder="Search by nationality" />
       <button className='submit-btn' onClick={() => dispatch(searchPlayers(searchName, searchNationality, 1, 10))}><CiSearch /></button>
+      <button className='reset-btn' onClick={handleReset} >
+        <GrPowerReset />
+    </button>
     </div>
-  );
+  )
 
   return (
     <div className="players-list-container">
