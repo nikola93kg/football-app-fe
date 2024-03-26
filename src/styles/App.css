@@ -170,3 +170,13 @@ select {
   text-align: center;
   color: #ff6b6b;
 }
+
+.Toastify__toast-container--top-right {
+  width: 350px;
+  .Toastify__toast-body {
+    width: 100%;
+  }
+  .Toastify__close-button {
+    width: 30px;
+  }
+}

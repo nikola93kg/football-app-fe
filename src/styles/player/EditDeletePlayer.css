@@ -4,6 +4,14 @@
     padding: 10px 0 10px 0;
     display: flex;
     flex-direction: column;
+    tbody {
+        background-image: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.575),
+      rgba(248, 248, 248, 0.788)
+    ), url("https://d2x51gyc4ptf2q.cloudfront.net/content/uploads/2024/02/13112516/champions-league-trophy.jpg");
+    background-attachment: fixed;
+    }
     .buttons {
         display: flex;
     }
