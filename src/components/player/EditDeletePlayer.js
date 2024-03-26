@@ -3,12 +3,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import { editPlayer, fetchPlayers, deletePlayer, fetchPlayerPositions } from "../../redux/actions/playerActions";
+import { editPlayer, fetchPlayers, deletePlayer, searchPlayers } from "../../redux/actions/playerActions";
 import { fetchTeams } from "../../redux/actions/teamActions";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import Modal from "../Modal";
 import "../../styles/player/EditDeletePlayer.css"; 
+import { CiSearch } from "react-icons/ci";
+import { sortObjectsAlphabetically } from "../../utils/formatHelpers";
+
 
 const PlayerSchema = Yup.object().shape({
   name: Yup.string().required("Name is required"),
@@ -16,27 +19,22 @@ const PlayerSchema = Yup.object().shape({
   nationality: Yup.string().required("Nationality is required"),
   jerseyNumber: Yup.number().required("Jersey Number is required").positive().integer(),
   teamName: Yup.string().required("Team Name is required"),
-  positions: Yup.array().of(Yup.string()).required("Position is required"),
 });
 
-// TODO: Sortiraj klubove po abecedi kada se otvori modal za editovanje
+// TODO: Odradi paginaciju, ili mozda dodaj react-table umesto ove koju vec imas. Mozda neki conditaional rendering za PlayerList i ovu komponentu
 
 function EditDeletePlayer() {
   const dispatch = useDispatch();
-  // const { players } = useSelector((state) => state.player);
   const [editingPlayer, setEditingPlayer] = useState(null);
+  const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
     dispatch(fetchPlayers());
     dispatch(fetchTeams());
-    dispatch(fetchPlayerPositions());
   }, [dispatch]);
 
   const players = useSelector(state => state.player.players);
   const teams = useSelector(state => state.team.teams);
-  const positions = useSelector(state => state.player.positions || ["Position not found"]);
-
-  console.log("provera pozicija: ",positions)
 
   const handleDelete = (id) => {
     dispatch(deletePlayer(id))
@@ -48,11 +46,25 @@ function EditDeletePlayer() {
       });
   };
 
+  const handleSearch = () => {
+    dispatch(searchPlayers(searchName));
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   if (!players.length) {
     return <div>Loading players...</div>;
   }
   return (
     <div className='edit-delete-player-container'>
+      <div className='search-box'>
+        <input value={searchName} onChange={e => setSearchName(e.target.value)} onKeyDown={handleKeyPress} placeholder="Search player name" /> 
+        <button className='submit-btn' onClick={handleSearch}><CiSearch /></button>
+      </div>
       <h2>Players</h2>
       <table>
         <thead>
@@ -93,7 +105,7 @@ function EditDeletePlayer() {
               jerseyNumber: editingPlayer.jerseyNumber,
               teamName: editingPlayer.teamName || '',
               teamId: editingPlayer.teamId || '',
-              positions: editingPlayer.positions || [],
+            
             }}
             validationSchema={PlayerSchema}
             onSubmit={(values) => {
@@ -131,45 +143,17 @@ function EditDeletePlayer() {
                   <Field as="select" name="teamId" onChange={(e) => setFieldValue("teamId", e.target.value)}>
                  
                     <option value="">{values.teamName}</option>
-                    {teams.map((team) => (
-                      <option key={team.id} value={team.id}>
-                        {team.name}
-                      </option>
-                    ))}
+                    {sortObjectsAlphabetically(teams, 'name').map((team) => (
+                    <option key={team.id} value={team.id}>
+                      {team.name}
+                    </option>
+                  ))}
                   </Field>
                   {errors.teamId && touched.teamId ? (
                     <div>{errors.teamId}</div>
                   ) : null}
               </div>
 
-              <div className="option-select">
-                <label htmlFor="positions">Position</label>
-                <Field as="select" name="positions" multiple onChange={event => {
-                        const options = event.target.options;
-                        const value = [];
-                        for (let i = 0, l = options.length; i < l; i++) {
-                          if (options[i].selected) {
-                            value.push(options[i].value);
-                          }
-                        }
-                        setFieldValue("positions", value);
-                      }}>
-                  {editingPlayer.positions && editingPlayer.positions.map((position, index) => (
-                    <option key={index} value={position} selected>
-                      {position}
-                    </option>
-                  ))}
-                  {positions.map((position, index) => (
-                    !editingPlayer.positions.includes(position) && (
-                      <option key={index} value={position}>
-                        {position}
-                      </option>
-                    )
-                  ))}
-                </Field>
-              </div>
-
-                
                 <button type="submit">Save Changes</button>
               </Form>
             )}

@@ -5,6 +5,7 @@ import Error from '../Error';
 import "../../styles/team/TeamList.css"
 import Loading from '../Loading';
 import { Link } from 'react-router-dom';
+import { sortObjectsAlphabetically } from '../../utils/formatHelpers';
 
 function TeamList() {
 
@@ -18,7 +19,7 @@ function TeamList() {
     if (error) return <Error />
     if (loading) return <Loading /> // Ne zaboravi da imas wrapper klasu za suspense
 
-    const sortedTeams = teams.sort((a, b) => a.name.localeCompare(b.name));
+    const sortedTeams = sortObjectsAlphabetically(teams, 'name');
 
     return (
       <>

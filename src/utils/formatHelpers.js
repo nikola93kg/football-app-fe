@@ -11,3 +11,7 @@ export const formatPlayerPositions = (positions) => {
   }
   return ''; // ako positions nije niz vratice prazan string
 };
+
+export const sortObjectsAlphabetically = (array, key) => {
+  return [...array].sort((a, b) => a[key].localeCompare(b[key]));
+};

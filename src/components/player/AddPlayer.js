@@ -6,7 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { addPlayer, fetchPlayerPositions } from '../../redux/actions/playerActions';
 import { fetchTeams } from "../../redux/actions/teamActions"
-import "../../styles/player/AddPlayer.css"
+import "../../styles/player/AddPlayer.css";
+import { sortObjectsAlphabetically } from "../../utils/formatHelpers";
+
 
 const validationSchema = Yup.object({
     name: Yup.string().required('Name is required'),
@@ -89,7 +91,7 @@ function AddPlayer() {
               <label htmlFor="teamId">Team</label>
               <select id="teamId" name="teamId" onChange={formik.handleChange} value={formik.values.teamId} >
                 <option value="">Select a team</option>
-                  {teams.map(team => (
+                  {sortObjectsAlphabetically(teams, 'name').map(team => (
                     <option key={team.id} value={team.id}>{team.name}</option>
                   ))}
               </select>

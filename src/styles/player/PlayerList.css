@@ -1,6 +1,7 @@
 .players-list-container {
     background-color: #fff9;
-    /* height: calc(100vh - var(--navbar-height)); */
+    min-height: calc(100vh - var(--navbar-height));
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;

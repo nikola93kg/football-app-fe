@@ -42,7 +42,7 @@ export const searchPlayers = (name, nationality) => async (dispatch) => {
         params: { name, nationality },
       }
     );
-    console.log("da li ima ovde tima: ", response.data)
+    console.log("da li ima ovde tima: ", response.data) // ovde sam imao bug jer sam kupio podatke sa Player entiteta, a ne sa PlayerDTO-a
     dispatch({ type: SEARCH_PLAYERS_SUCCESS, payload: response.data });
   } catch (error) {
     dispatch({ type: SEARCH_PLAYERS_FAILURE, payload: error.message });
