@@ -47,32 +47,6 @@
     border-bottom: 1px solid #ddd;
   }
 
-  .player-search-box {
-    display: flex;
-    align-items: center;
-    input {
-      margin: 0 10px;
-      width: 400px;
-      height: 25px;
-    }
-    button {
-      width: 45px;
-      height: 40px;
-      font-size: 1.7em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 0;
-    }
-    .reset-btn {
-      margin-left: 5px;
-      font-size: 1.3em;
-      color: #f00;
-      &:hover {
-        color: #004085;
-      }
-    }
-  }
   .pagination {
     display: flex;
     align-items: center;

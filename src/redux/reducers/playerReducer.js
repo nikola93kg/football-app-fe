@@ -11,7 +11,8 @@ import {
   FETCH_PLAYER_POSITIONS_SUCCESS,
   SEARCH_PLAYERS_REQUEST,
   SEARCH_PLAYERS_SUCCESS,
-  SEARCH_PLAYERS_FAILURE  
+  SEARCH_PLAYERS_FAILURE,
+  RESET_SEARCH   
 } from "../types/types";
 
 const initialState = {
@@ -98,6 +99,13 @@ const playerReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload,
+      };
+      case RESET_SEARCH:
+      return {
+        ...state,
+        players: [],
+        error: null
+        // ostatak stanja po potrebi
       };
     default:
       return state;

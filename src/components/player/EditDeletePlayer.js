@@ -8,16 +8,13 @@ import { fetchTeams } from "../../redux/actions/teamActions";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import Modal from "../Modal";
-import { CiSearch } from "react-icons/ci";
 import { sortObjectsAlphabetically } from "../../utils/formatHelpers";
 import { usePagination, useTable } from "react-table";
 import Pagination from "../Pagination";
 import useModal from "../../hooks/useModal";
-import {handleKeyPress} from "../../utils/handleKeyPress"
-import "../../styles/player/EditDeletePlayer.css";
-import PlayerNotFound from "./PlayerNotFound";
-import { useNavigate } from "react-router-dom";
 import SearchBox from "../SearchBox";
+import PlayerNotFound from "./PlayerNotFound";
+import "../../styles/player/EditDeletePlayer.css";
 
 
 const PlayerSchema = Yup.object().shape({
@@ -33,14 +30,12 @@ const PlayerSchema = Yup.object().shape({
 
 function EditDeletePlayer() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [searchName, setSearchName] = useState("");
   const players = useSelector((state) => state.player.players);
   const teams = useSelector((state) => state.team.teams);
   const { isModalOpen: isModalOpen, itemId: playerIdToDelete, openModal: handleOpenDeleteModal, closeModal: handleCloseDeleteModal } = useModal();
 
-  const searchFailed = useSelector(state => state.player.searchFailed);
 
   useEffect(() => {
     dispatch(fetchPlayers());
@@ -125,14 +120,22 @@ function EditDeletePlayer() {
     }
   };
 
+  if (players.length === 0) return <PlayerNotFound onReset={() =>{
+    setSearchName("");
+  }} />
+
   return (
     <div className="edit-delete-player-container">
-      <div className="search-box">
-      <input value={searchName} onChange={(e) => setSearchName(e.target.value)} onKeyDown={handleKeyPress(handleSearch)} placeholder="Search player name" />
-        <button className="submit-btn" onClick={handleSearch}>
-          <CiSearch />
-        </button>
-      </div>
+      <SearchBox inputs={[
+          {
+            value: searchName,
+            onChange: (e) => setSearchName(e.target.value),
+            placeholder: "Search player name",
+          },
+        ]}
+        onSearch={handleSearch}
+      />
+
       <h2>Players</h2>
       <table {...getTableProps()}>
         <thead>
@@ -201,7 +204,8 @@ function EditDeletePlayer() {
                 .catch((error) => {
                   toast.error("Something went wrong");
                 });
-            }}>
+            }}
+          >
             {({ errors, touched, setFieldValue, values }) => (
               <Form>
                 <label htmlFor="name">Name</label>
@@ -223,7 +227,11 @@ function EditDeletePlayer() {
 
                 <div className="option-select">
                   <label htmlFor="teamId">Team</label>
-                  <Field as="select" name="teamId" onChange={(e) => setFieldValue("teamId", e.target.value)} >
+                  <Field
+                    as="select"
+                    name="teamId"
+                    onChange={(e) => setFieldValue("teamId", e.target.value)}
+                  >
                     <option value="">{values.teamName}</option>
                     {sortObjectsAlphabetically(teams, "name").map((team) => (
                       <option key={team.id} value={team.id}>

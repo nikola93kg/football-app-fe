@@ -5,11 +5,10 @@ import { fetchPlayers, searchPlayers } from "../../redux/actions/playerActions";
 import { formatPlayerPositions } from "../../utils/formatHelpers";
 import Loading from "../Loading";
 import Error from "../Error";
-import { CiSearch } from "react-icons/ci";
-import { GrPowerReset } from "react-icons/gr";
 import Pagination from "../Pagination";
-import "../../styles/player/PlayerList.css";
 import SearchBox from "../SearchBox";
+import "../../styles/player/PlayerList.css";
+import PlayerNotFound from "./PlayerNotFound";
 
 
 const PlayersList = () => {
@@ -78,12 +77,11 @@ const PlayersList = () => {
 
   if (loading) return <Loading />
   if (error) return <Error />
+  if (players.length === 0) return <PlayerNotFound onReset={() =>{
+    setSearchName("");
+    setSearchNationality("");
+  }} />
 
-  const handleSearchKeyPress = (e) => {
-    if (e.key === "Enter") {
-      dispatch(searchPlayers(searchName, searchNationality, 1, 10));
-    }
-  };
 
   const handleReset = () => {
     setSearchName("");
@@ -94,25 +92,35 @@ const PlayersList = () => {
   return (
     <div className="players-list-container">
       <h2>All Players</h2>
-      <div className="player-search-box">
-        <input value={searchName} onChange={(e) => setSearchName(e.target.value)} onKeyDown={handleSearchKeyPress} placeholder="Search by name" />
-        <input value={searchNationality} onChange={(e) => setSearchNationality(e.target.value)} onKeyDown={handleSearchKeyPress} placeholder="Search by nationality" />
-        <button className="submit-btn" onClick={() => dispatch(searchPlayers(searchName, searchNationality, 1, 10))} >
-          <CiSearch />
-        </button>
-        <button className="reset-btn" onClick={handleReset}>
-          <GrPowerReset />
-        </button>
-      </div>
+      <SearchBox inputs={[{
+            value: searchName,
+            onChange: (e) => setSearchName(e.target.value),
+            placeholder: "Search by name",
+          },
+          {
+            value: searchNationality,
+            onChange: (e) => setSearchNationality(e.target.value),
+            placeholder: "Search by nationality",
+          },
+        ]}
+        onSearch={() =>
+          dispatch(searchPlayers(searchName, searchNationality, 1, 10))
+        }
+        onReset={handleReset} />
+
       <table {...getTableProps()} className="table">
-      <thead>
-          {headerGroups.map(headerGroup => (
+        <thead>
+          {headerGroups.map((headerGroup) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
+              {headerGroup.headers.map((column) => (
                 <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render("Header")}
                   <span>
-                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
                   </span>
                 </th>
               ))}

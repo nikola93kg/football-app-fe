@@ -13,6 +13,7 @@ import {
   SEARCH_PLAYERS_REQUEST,
   SEARCH_PLAYERS_SUCCESS,
   SEARCH_PLAYERS_FAILURE,
+  RESET_SEARCH 
 } from "../types/types";
 
 const fetchPlayersRequest = () => {
@@ -117,3 +118,7 @@ export const deletePlayer = (id) => async (dispatch) => {
     dispatch({ type: DELETE_PLAYER_FAILURE, payload: error.message });
   }
 };
+
+export const resetSearch = () => ({
+  type: RESET_SEARCH,
+});
