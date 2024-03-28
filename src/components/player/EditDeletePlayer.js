@@ -12,7 +12,12 @@ import { CiSearch } from "react-icons/ci";
 import { sortObjectsAlphabetically } from "../../utils/formatHelpers";
 import { usePagination, useTable } from "react-table";
 import Pagination from "../Pagination";
+import useModal from "../../hooks/useModal";
+import {handleKeyPress} from "../../utils/handleKeyPress"
 import "../../styles/player/EditDeletePlayer.css";
+import PlayerNotFound from "./PlayerNotFound";
+import { useNavigate } from "react-router-dom";
+import SearchBox from "../SearchBox";
 
 
 const PlayerSchema = Yup.object().shape({
@@ -28,12 +33,14 @@ const PlayerSchema = Yup.object().shape({
 
 function EditDeletePlayer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [editingPlayer, setEditingPlayer] = useState(null);
   const [searchName, setSearchName] = useState("");
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [playerIdToDelete, setPlayerIdToDelete] = useState(null);
   const players = useSelector((state) => state.player.players);
   const teams = useSelector((state) => state.team.teams);
+  const { isModalOpen: isModalOpen, itemId: playerIdToDelete, openModal: handleOpenDeleteModal, closeModal: handleCloseDeleteModal } = useModal();
+
+  const searchFailed = useSelector(state => state.player.searchFailed);
 
   useEffect(() => {
     dispatch(fetchPlayers());
@@ -104,22 +111,6 @@ function EditDeletePlayer() {
     dispatch(searchPlayers(searchName));
   };
 
-  const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
-      handleSearch();
-    }
-  };
-
-  const handleOpenDeleteModal = (playerId) => {
-    setIsDeleteModalOpen(true);
-    setPlayerIdToDelete(playerId);
-  };
-
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-    setPlayerIdToDelete(null);
-  };
-
   const handleConfirmDelete = () => {
     if (playerIdToDelete) {
       dispatch(deletePlayer(playerIdToDelete))
@@ -134,12 +125,10 @@ function EditDeletePlayer() {
     }
   };
 
-  if (!players.length) return <div>Loading players...</div>
-
   return (
     <div className="edit-delete-player-container">
       <div className="search-box">
-        <input value={searchName} onChange={(e) => setSearchName(e.target.value)} onKeyDown={handleKeyPress} placeholder="Search player name" />
+      <input value={searchName} onChange={(e) => setSearchName(e.target.value)} onKeyDown={handleKeyPress(handleSearch)} placeholder="Search player name" />
         <button className="submit-btn" onClick={handleSearch}>
           <CiSearch />
         </button>
@@ -180,7 +169,7 @@ function EditDeletePlayer() {
         setPageSize={setPageSize}
         pageSize={pageSize}
       />
-      {isDeleteModalOpen && (
+      {isModalOpen && (
         <Modal onClose={handleCloseDeleteModal}>
           <h2>Are you sure?</h2>
           <p>Do you really want to delete this player?</p>

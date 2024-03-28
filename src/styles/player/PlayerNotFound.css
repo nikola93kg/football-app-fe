@@ -1,0 +1,24 @@
+.player-not-found-container {
+    margin: var(--container-margin);
+    min-height: calc(100vh - var(--navbar-height));
+    background-color: #fff9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h2 {
+        padding-top: 30px;
+        margin-top: 0;
+    }
+    img {
+        height: 390px;
+    }
+    a {
+        margin-top: 20px;
+        font-size: 1.4em;
+        text-decoration: none;
+        color: #3867d6;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+}

@@ -30,14 +30,15 @@ const playerReducer = (state = initialState, action) => {
       };
     case FETCH_PLAYERS_SUCCESS:
       return {
+        ...state,
         loading: false,
         players: action.payload,
         error: "",
       };
     case FETCH_PLAYERS_FAILURE:
       return {
+        ...state,
         loading: false,
-        players: [],
         error: action.payload,
       };
     case ADD_PLAYER_SUCCESS:

@@ -6,12 +6,11 @@ import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import { fetchCoaches } from "../../redux/actions/coachActions";
 import Modal from "../Modal";
-import "../../styles/team/EditTeam.css";
 import Loading from "../Loading";
 import { deleteEntity } from "../../redux/actions/genericActions";
+import useModal from "../../hooks/useModal";
+import "../../styles/team/EditTeam.css";
 
-
-// TODO: Mozda neku logiku da premestis u redux?
 
 function EditTeam() {
   const dispatch = useDispatch();
@@ -20,8 +19,8 @@ function EditTeam() {
   const [teamName, setTeamName] = useState("");
   const [teamLogo, setTeamLogo] = useState("");
   const [coachId, setCoachId] = useState("");
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [teamIdToDelete, setTeamIdToDelete] = useState(null);
+
+  const { isModalOpen: isModalOpen, itemId: teamIdToDelete, openModal: handleOpenDeleteModal, closeModal: handleCloseDeleteModal } = useModal();
 
   useEffect(() => {
     if (editingTeam) {
@@ -48,20 +47,10 @@ function EditTeam() {
     const updatedTeamData = { name: teamName, logo: teamLogo, coachId };
     handleEdit(editingTeam.id, updatedTeamData);
   };
-
-  const handleOpenDeleteModal = (teamId) => {
-    setIsDeleteModalOpen(true);
-    setTeamIdToDelete(teamId);
-  };
-  
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-    setTeamIdToDelete(null);
-  };
   
   const handleConfirmDelete = () => {
     if (teamIdToDelete) {
-      dispatch(deleteEntity('teams', teamIdToDelete)) 
+      dispatch(deleteEntity('teams', teamIdToDelete))
         .then(() => {
           toast.success("Team successfully deleted");
           handleCloseDeleteModal();
@@ -99,20 +88,19 @@ function EditTeam() {
                 <BiSolidEditAlt />
               </button>
               <button className="delete-btn" onClick={() => handleOpenDeleteModal(team.id)} >
-  <MdDelete />
-</button>
+                <MdDelete />
+              </button>
             </div>
           </li>
         ))}
       </ul>
-      {isDeleteModalOpen && (
-  <Modal onClose={handleCloseDeleteModal}>
-    <h2>Are you sure?</h2>
-    <p>Do you really want to delete this team? </p>
-    <button onClick={handleConfirmDelete}>Yes</button>
-  </Modal>
-)}
-
+      {isModalOpen && (
+        <Modal onClose={handleCloseDeleteModal}>
+          <h2>Are you sure?</h2>
+          <p>Do you really want to delete this team? </p>
+          <button onClick={handleConfirmDelete}>Yes</button>
+        </Modal>
+      )}
       {editingTeam && (
         <Modal onClose={() => setEditingTeam(null)}>
           <form onSubmit={handleSubmit}>

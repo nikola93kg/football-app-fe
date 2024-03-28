@@ -9,6 +9,7 @@ import { CiSearch } from "react-icons/ci";
 import { GrPowerReset } from "react-icons/gr";
 import Pagination from "../Pagination";
 import "../../styles/player/PlayerList.css";
+import SearchBox from "../SearchBox";
 
 
 const PlayersList = () => {

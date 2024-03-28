@@ -1,12 +1,10 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import HomePage from "./pages/HomePage";
 import TeamList from './components/team/TeamList';
 import AddTeam from "./components/team/AddTeam";
 import Navbar from './components/navigation/Navbar';
-import "./styles/App.css"
 import EditDeleteTeam from './components/team/EditDeleteTeam';
 import AddReferee from './components/referee/AddReferee';
 import RefereeList from './components/referee/RefereeList';
@@ -17,10 +15,10 @@ import EditDeletePlayer from './components/player/EditDeletePlayer';
 import CoachList from './components/coach/CoachList';
 import AddCoach from './components/coach/AddCoach';
 import EditDeleteCoach from './components/coach/EditDeleteCoach';
-import TeamListWrapper from './components/team/TeamListWrapper';
 import TeamDetails from './components/team/TeamDetails';
-import Sidebar from './components/navigation/Sidebar';
-import Submenu from './components/navigation/Submenu';
+import 'react-toastify/dist/ReactToastify.css';
+import "./styles/App.css"
+
 
 function App() {
   return (

@@ -7,6 +7,7 @@ import { editCoach, fetchCoaches, deleteCoach } from "../../redux/actions/coachA
 import { BiSolidEditAlt } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import Modal from "../Modal";
+import useModal from "../../hooks/useModal";
 import "../../styles/coach/EditDeleteCoach.css";
 
 const CoachSchema = Yup.object().shape({
@@ -19,45 +20,28 @@ const CoachSchema = Yup.object().shape({
 function EditDeleteCoach() {
   const dispatch = useDispatch();
   const [editingCoach, setEditingCoach] = useState(null);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [coachIdToDelete, setCoachIdToDelete] = useState(null);
+  const { isModalOpen, itemId, openModal, closeModal } = useModal();
 
   useEffect(() => {
     dispatch(fetchCoaches());
   }, [dispatch]);
 
   const coaches = useSelector(state => state.coach.coaches);
-
-  const handleDelete = (id) => {
-    dispatch(deleteCoach(id))
-      .then(() => {
-        toast.success("Coach deleted successfully!");
-      })
-      .catch((error) => {
-        toast.error("Something went wrong with deleting the coach");
-      });
-  };
-
-  const handleOpenDeleteModal = (coachId) => {
-    setIsDeleteModalOpen(true);
-    setCoachIdToDelete(coachId);
-  };
   
-  const handleCloseDeleteModal = () => {
-    setIsDeleteModalOpen(false);
-    setCoachIdToDelete(null);
+  const handleOpenDeleteModal = (coachId) => {
+    openModal(coachId);
   };
   
   const handleConfirmDelete = () => {
-    if (coachIdToDelete) {
-      dispatch(deleteCoach(coachIdToDelete))
+    if (itemId) { 
+      dispatch(deleteCoach(itemId))
         .then(() => {
-          setIsDeleteModalOpen(false);
+          closeModal(); 
           toast.success("Coach deleted successfully!");
-          dispatch(fetchCoaches()); 
+          dispatch(fetchCoaches());
         })
         .catch((error) => {
-          setIsDeleteModalOpen(false);
+          closeModal(); 
           toast.error("Something went wrong with deleting the coach");
         });
     }
@@ -65,7 +49,7 @@ function EditDeleteCoach() {
   
 
   if (!coaches.length) {
-    return <div>Loading coaches...</div>;
+    return <div>Loading coaches...</div>
   }
 
   return (
@@ -99,8 +83,8 @@ function EditDeleteCoach() {
           ))}
         </tbody>
       </table>
-      {isDeleteModalOpen && (
-  <Modal onClose={handleCloseDeleteModal}>
+      {isModalOpen && (
+  <Modal onClose={closeModal}>
     <h2>Are you sure?</h2>
     <p>Do you really want to delete this coach?</p>
     <div>
